@@ -1,0 +1,23 @@
+1. Setup & Config
+We do this once when we first get Git or start a project.
+git config --global user.name "Your Name" -> Tells Git who we are.
+git config --global user.email "you@example.com" -> Links our email to our work.
+git init -> Turns our current folder into a local Git project.
+git clone <url> -> Grabs an existing project from GitHub and downloads it to our machine.
+2. The Daily Loop: For saving work
+This is what we do all day long while writing code.
+git status -> See what files we edited, deleted, or added.
+git add <file> -> Stage a file (put it in the "ready to save" box). We use git add . to stage everything.
+git commit -m "fixed login bug" -> Take a permanent snapshot of those staged files with a short note.
+3. Branching: To avoid breaking the main code
+We always create a branch when working on a new feature so we don't mess up the working version.
+git checkout -b <branch-name> -> Create a new branch and jump straight into it.
+git checkout <branch-name> -> Switch back to an existing branch (like main).
+git merge <branch-name> -> Pull the code from another branch into the one we are currently standing on.
+4. Syncing with GitHub
+We move code between our laptop and the cloud with following commands
+git push origin <branch-name> -> Upload our local commits up to GitHub.
+git pull -> Grab whatever our teammates uploaded to GitHub and merge it into our local files.
+Pull Requests (PRs): Done on the GitHub website. It’s just asking our team to look over our branch before we officially merge it into the main project.
+Documentation (README.md): Written using Markdown formatting. It acts as the front page of our repository to explain the project setup, tools, and usage guidelines to other developers.
+
