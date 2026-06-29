@@ -34,7 +34,7 @@ Optionals are a core safety feature in Swift used to handle the absence of a val
 
 ---
 
-## 💻 Code Examples
+##  Code Examples
 
 ### Basic Declarations & Type Inference
 ```swift
