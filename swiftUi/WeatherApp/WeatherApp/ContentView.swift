@@ -67,6 +67,7 @@ struct ContentView: View {
                         ForEach(weeklyForecast) { forecast in
                             
                             NavigationLink(destination: LazyView { WeatherDetailView(isNight: isNight, forecast: forecast) }) {
+                                
                                 OtherWeatherContent(isNight: $isNight, day: forecast.day, imageName: forecast.imageName, temp: forecast.temp)
                             }
                             .buttonStyle(PlainButtonStyle())

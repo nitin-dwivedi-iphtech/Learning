@@ -5,18 +5,23 @@
 //  Created by iPHTech6 on 06/07/26.
 //
 
-//
-//  File.swift
-//  WeatherApp
-//
-//  Created by iPHTech6 on 06/07/26.
-//
 
 import SwiftUI
+
+class ScoreBoard : ObservableObject{
+    @Published private(set) var score : Int = 45
+    
+    func updatScore(score: Int){
+        self.score = score
+    }
+}
+
+// Parent View
 
 struct WeatherDetailView : View{
     var isNight: Bool
     let forecast: WeatherDay
+    @StateObject var scoreBoard = ScoreBoard()
     
     var body: some View {
         ZStack {
@@ -32,13 +37,17 @@ struct WeatherDetailView : View{
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
-                
-                Text("\(forecast.temp)°")
+
+                Text("\(scoreBoard.score)°")
                     .font(.system(size: 70, weight: .bold))
-                
+              
+               
                 Text(forecast.description)
                     .font(.title2)
                     .italic()
+                
+                ButtonView(scoreBoard: scoreBoard)
+               
             }
             .foregroundColor(.white)
         }
@@ -46,6 +55,29 @@ struct WeatherDetailView : View{
     }
 }
 
+// child View
+
+struct ButtonView : View{
+    
+    var scoreBoard : ScoreBoard
+    
+    var body : some View{
+        VStack{
+            
+            Text("\(scoreBoard.score)°")
+                .font(.system(size: 30, weight: .bold))
+          
+            Button{
+                scoreBoard.updatScore(score: 80)
+            }label:{
+                Text("Update")
+                    .frame(width: 300, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .background(Color.orange)
+                    .cornerRadius(15)
+            }
+        }
+    }
+}
 
 struct Preview: PreviewProvider {
     static var previews: some View {
