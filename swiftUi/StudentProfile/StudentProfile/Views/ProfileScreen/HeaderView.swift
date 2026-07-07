@@ -41,6 +41,6 @@ struct HeaderView:View{
 
 struct HeaderPreview:PreviewProvider{
     static var previews: some View{
-        ContentView().environmentObject(ProfileSetting())
+        HeaderView().environmentObject(ProfileSetting())
     }
 }

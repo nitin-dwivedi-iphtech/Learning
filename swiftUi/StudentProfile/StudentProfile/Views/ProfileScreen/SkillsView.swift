@@ -64,6 +64,6 @@ struct MetaSkillView:View{
 
 struct SkillPreview:PreviewProvider{
     static var previews: some View {
-        ContentView()
+        SkillView()
     }
 }
