@@ -28,7 +28,7 @@ struct SkillView:View{
         Section{
             VStack(alignment: .leading, spacing: 12){
                 Text("Skills")
-                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
                   
                 LazyVGrid(columns: columns,alignment: .center, spacing: 10){
                     ForEach(skills){skill in

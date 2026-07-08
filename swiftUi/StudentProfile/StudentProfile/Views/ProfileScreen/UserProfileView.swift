@@ -7,31 +7,73 @@
 
 import SwiftUI
 
-struct UserProfileView:View{
+// Understand this
+struct UserProfileData: View{
+    @Environment(\.currentStudent) private var currentStudent
+        
+        var body: some View {
+            if let student = currentStudent {
+                UserProfileView(student: student)
+            } else {
+                UserProfileView(student: nil)
+            }
+        }
+}
+
+struct UserProfileView: View {
     
-    @EnvironmentObject var userSetting:ProfileSetting
+    @ObservedObject var student: Student
+        
+    init?(student: Student?) {
+        guard let student = student else { return nil }
+        self.student = student
+    }
     
-    var body: some View{
-        HStack{
+    var body: some View {
+        
+        HStack(alignment: .center, spacing: 16) {
+            
             Image("user")
                 .resizable()
-                .frame(minWidth: 30, idealWidth: 60, maxWidth: 98, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 60, maxHeight: 98, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .cornerRadius(25, antialiased: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 70, height: 70)
+                .clipShape(Circle())
             
-            VStack{
-                Text("\(userSetting.username)")
-                    .font(.system(size: 28,design: .rounded))
-                    .padding(.bottom,5)
-                Text("Master's Computer Application")
-                    .font(.system(size:15,design: .rounded))
-            }.padding(.leading,40)
-        }.padding(.horizontal,10)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(student.username ?? "N/A")
+                    .font(.system(.title2, design: .rounded))
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                
+                Text("Student Id: \(student.studentId ?? "N/A")")
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundColor(.secondary)
+                
+                
+                HStack(spacing: 10) {
+                    Label(student.userEmail ?? "N/A", systemImage: "envelope")
+                    Text("•")
+                        .foregroundColor(.secondary)
+                    Label(student.userPhone ?? "N/A", systemImage: "phone")
+                }
+                .font(.system(size: 13, design: .rounded))
+                .foregroundColor(.blue)
+                .padding(.top, 2)
+            }.lineLimit(1)
+            
+            Spacer()
+        }
+        .padding()
+        .background(Color(.systemBackground))
     }
 }
 
-struct UserProfilePreview : PreviewProvider{
-    static var previews: some View {
-        UserProfileView()
-    }
-}
+//struct UserProfilePreview: PreviewProvider {
+//    static var previews: some View {
+//        UserProfileViewstudent: <#Student?#>()
+//            .environment(\.currentStudent, nil)
+//            .previewLayout(.sizeThatFits)
+//            .padding()
+//    }
+//}

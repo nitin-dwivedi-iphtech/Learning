@@ -9,10 +9,15 @@ import SwiftUI
 
 @main
 struct StudentProfileApp: App {
+    
     @StateObject private var userSetting = ProfileSetting()
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(userSetting)
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(userSetting)
         }
     }
 }

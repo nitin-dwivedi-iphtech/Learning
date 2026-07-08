@@ -14,10 +14,19 @@ class ProfileSetting:ObservableObject{
             objectWillChange.send()
         }
     }
-    @AppStorage("Username") var username = "Kane Wastson"{
+    @AppStorage("Username") var username = "Kane Watson"{
         willSet{
             objectWillChange.send()
         }
     }
-    
+    @AppStorage("Email") var userEmail = "ram@exm.com"{
+        willSet{
+            objectWillChange.send()
+        }
+    }
+    @AppStorage("Phone") var userPhone = "8456324785"{
+        willSet{
+            objectWillChange.send()
+        }
+    }
 }

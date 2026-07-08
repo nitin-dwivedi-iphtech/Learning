@@ -21,7 +21,7 @@ struct SubjectView:View{
         Section{
             VStack(alignment: .leading, spacing: 12){
                 Text("Subject")
-                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
                 
                 ForEach(subjectData){subject in
                     SubjectCard(name: subject.name, des: subject.des, progress: subject.progress)
