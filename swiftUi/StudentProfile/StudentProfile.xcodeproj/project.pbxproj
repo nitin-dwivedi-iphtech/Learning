@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134CB3BB2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */; };
 		2138A72A2FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */; };
-		2138A72D2FFF7FEA0025A8AC /* DetailAcadamicInstitutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A72C2FFF7FEA0025A8AC /* DetailAcadamicInstitutionView.swift */; };
 		2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */; };
 		2138A7332FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */; };
 		2138A7372FFF877F0025A8AC /* AcadamicEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7362FFF877F0025A8AC /* AcadamicEditView.swift */; };
@@ -45,8 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicInstitutionView.swift; sourceTree = "<group>"; };
 		2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicHeaderView.swift; sourceTree = "<group>"; };
-		2138A72C2FFF7FEA0025A8AC /* DetailAcadamicInstitutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailAcadamicInstitutionView.swift; path = ../../../../../../DetailAcadamicInstitutionView.swift; sourceTree = "<group>"; };
 		2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicCoreMetrixView.swift; sourceTree = "<group>"; };
 		2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicEnrolledSubjectView.swift; sourceTree = "<group>"; };
 		2138A7362FFF877F0025A8AC /* AcadamicEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcadamicEditView.swift; sourceTree = "<group>"; };
@@ -203,9 +203,9 @@
 			children = (
 				21B9F52D2FFE5DBD00C084EF /* DetailAcadamicView.swift */,
 				2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */,
-				2138A72C2FFF7FEA0025A8AC /* DetailAcadamicInstitutionView.swift */,
 				2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */,
 				2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */,
+				134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */,
 			);
 			path = AcadamicScreen;
 			sourceTree = "<group>";
@@ -310,6 +310,7 @@
 				219A37972FFD247500429F8B /* ProfileSetting.swift in Sources */,
 				219A37722FFD08EC00429F8B /* CardView.swift in Sources */,
 				21B9F52A2FFE56C300C084EF /* UserPersonalView.swift in Sources */,
+				134CB3BB2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift in Sources */,
 				219A37802FFD14B900429F8B /* SkillModel.swift in Sources */,
 				21B9F5242FFE2B3300C084EF /* UserImageView.swift in Sources */,
 				2138A72A2FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift in Sources */,
@@ -321,7 +322,6 @@
 				219A378D2FFD16BF00429F8B /* SubjectModel.swift in Sources */,
 				21B9F53B2FFE626400C084EF /* PersistenceController.swift in Sources */,
 				219A37792FFD0A4300429F8B /* UserAboutView.swift in Sources */,
-				2138A72D2FFF7FEA0025A8AC /* DetailAcadamicInstitutionView.swift in Sources */,
 				219A37762FFD096000429F8B /* UserProfileView.swift in Sources */,
 				219A379B2FFD2DCC00429F8B /* ProfileEditView.swift in Sources */,
 				2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */,

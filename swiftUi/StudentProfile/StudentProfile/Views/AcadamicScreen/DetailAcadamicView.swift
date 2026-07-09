@@ -45,36 +45,45 @@ struct DetailAcadamicView: View {
                 
                     VStack(alignment: .center, spacing: 5) {
                         
-                        // MARK: - Header
-                        DetailAcadamicHeaderView()
+                         DetailAcadamicHeaderView()
                         
                         ScrollView(.vertical, showsIndicators: false) {
-                        // MARK: - Institution Details Card
-                        DetailAcadamicInstitutionView()
-                        
-                        // MARK: - Core Metrics Grid (CGPA, Credits & Attendance)
-                       DetailAcadamicCoreMetrixView()
                             
-                        PerformanceMetricBox(
+                            DetailAcadamicInstitutionView()
+                            
+                            
+                            DetailAcadamicCoreMetrixView()
+                            
+                            
+                            PerformanceMetricBox(
                                 title: "Completed Credits",
                                 value: completedCredits,
                                 subtitle: "Required for graduation: 90 credits",
                                 icon: "trophy.fill",
                                 accentColor: .orange
-                        )
+                                
+                            )
                             
-                        Divider().padding(.vertical)
-                        
-                        SkillView()
                             
-                        Divider().padding(.vertical)
-                        
-                        // MARK: - Enrolled Subjects Section
-                        DetailAcadamicEnrolledSubjectView()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .padding(.bottom, 10)
+                            Divider().padding(.vertical)
+                            
+                            
+                            SkillView()
+                            
+                            
+                            Divider().padding(.vertical)
+                            
+                            // MARK: - Enrolled Subjects Section
+                            
+                            DetailAcadamicEnrolledSubjectView()
+                            
+                        }
+                    
+                        .padding(.horizontal, 16)
+                    
+                        .padding(.top, 8)
+                    
+                        .padding(.bottom, 10)
                 }
             }.navigationBarHidden(true)
         }
