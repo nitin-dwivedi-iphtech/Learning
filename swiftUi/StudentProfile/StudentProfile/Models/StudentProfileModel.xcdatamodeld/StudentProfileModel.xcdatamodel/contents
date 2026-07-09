@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2036" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Acadamics" representedClassName="Acadamics" syncable="YES" codeGenerationType="class">
+        <attribute name="attendancePercentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="cgpa" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="course" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="creditsCompleted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentSemester" optional="YES" attributeType="String"/>
+        <attribute name="departmentName" optional="YES" attributeType="String"/>
+        <attribute name="institution" optional="YES" attributeType="String"/>
+        <attribute name="studentId" optional="YES" attributeType="String"/>
+        <relationship name="student" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="acadamicsRecord" inverseEntity="Student"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="studentId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
-        <attribute name="dob" optional="YES" attributeType="String"/>
+        <attribute name="dob" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="studentId" optional="YES" attributeType="String"/>
         <attribute name="userEmail" optional="YES" attributeType="String"/>
         <attribute name="username" optional="YES" attributeType="String"/>
         <attribute name="userPhone" optional="YES" attributeType="String"/>
+        <relationship name="acadamicsRecord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Acadamics" inverseName="student" inverseEntity="Acadamics"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="studentId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Student" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Student" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Acadamics" positionX="-63" positionY="27" width="128" height="178"/>
     </elements>
 </model>

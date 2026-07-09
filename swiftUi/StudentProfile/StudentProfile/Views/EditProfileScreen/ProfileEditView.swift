@@ -15,6 +15,8 @@ struct ProfileEditView : View {
     @State private var email: String = ""
     @State private var phone: String = ""
     @State private var id: String = ""
+    @State private var dob: Date = Date()
+    @State private var gender: String  = ""
     @State private var showAlert = false
     
     func validateField(name:String, email:String, phone:String)->Bool{
@@ -53,7 +55,7 @@ struct ProfileEditView : View {
                         UserImageView()
                         
                         CardView{
-                            UserEditFieldsView(inputName: $name, inputEmail: $email, inputPhone: $phone, inputId: $id)
+                            UserEditFieldsView(inputName: $name, inputEmail: $email, inputPhone: $phone, inputId: $id, inputDate: $dob, inputGender: $gender)
                                 .padding(.horizontal, 20)
                                 .padding(.bottom, 30)
                         }
@@ -64,7 +66,7 @@ struct ProfileEditView : View {
                 
                 Button(action: {
                      if validateField(name: name, email: email, phone: phone) {
-                        saveData(name: name, email: email, phone: phone,id:id, student:currentStudent, viewContext:viewContext)
+                        saveData(name: name, email: email, phone: phone,id:id,gender: gender, dob: dob, student:currentStudent, viewContext:viewContext)
                         
                         self.presentationMode.wrappedValue.dismiss()
                     } else {

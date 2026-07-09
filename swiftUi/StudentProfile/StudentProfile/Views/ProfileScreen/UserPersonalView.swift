@@ -7,11 +7,32 @@
 
 import SwiftUI
 
-struct UserPersonalView: View {
-    @EnvironmentObject var userSetting: ProfileSetting
+struct UserPersonalLoader:View{
+    @Environment(\.currentStudent) var currentStudent
+    @State var showAlert: Bool
     
-    let dateOfBirth = "October 14, 2002"
-    let gender = "Female"
+    var body: some View{
+        if let student = currentStudent{
+            UserProfileView(student:student)
+        }
+    }
+}
+
+struct UserPersonalView: View {
+    
+    @ObservedObject var student: Student
+        
+    init?(student:Student){
+        self.student = student
+    }
+    
+    var formattedDate: String {
+        guard let dob = student.dob else {return "N/A"}
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: dob)
+    }
     
     var body: some View {
         Section {
@@ -31,13 +52,13 @@ struct UserPersonalView: View {
                 }
                 
                 VStack(spacing: 14) {
-                    PersonalDataRow(icon: "envelope.fill", label: "Email Address", value: userSetting.userEmail)
+                    PersonalDataRow(icon: "envelope.fill", label: "Email Address", value: student.userEmail ?? "N/A")
                     
-                    PersonalDataRow(icon: "phone.fill", label: "Phone Number", value: userSetting.userPhone)
+                    PersonalDataRow(icon: "phone.fill", label: "Phone Number", value: student.userPhone ?? "N/A")
                     
-                    PersonalDataRow(icon: "calendar", label: "Date of Birth", value: dateOfBirth)
+                    PersonalDataRow(icon: "calendar", label: "Date of Birth", value: formattedDate)
                     
-                    PersonalDataRow(icon: "person.fill", label: "Gender", value: gender)
+                    PersonalDataRow(icon: "person.fill", label: "Gender", value: student.gender ?? "N/A")
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -74,11 +95,11 @@ struct PersonalDataRow: View {
     }
 }
 
-struct UserPersonalView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserPersonalView()
-            .environmentObject(ProfileSetting())
-            .padding()
-            .previewLayout(.sizeThatFits)
-    }
-}
+//struct UserPersonalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserPersonalView()
+//            .environmentObject(ProfileSetting())
+//            .padding()
+//            .previewLayout(.sizeThatFits)
+//    }
+//}

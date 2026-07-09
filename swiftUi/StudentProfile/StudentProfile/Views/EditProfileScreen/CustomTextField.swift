@@ -11,7 +11,6 @@ import SwiftUI
 struct CustomTextField: View {
     
     @Binding var text: String
-    @EnvironmentObject var userSetting:ProfileSetting
     
     let title: String
     let placeholder: String
@@ -42,6 +41,85 @@ struct CustomTextField: View {
     }
 }
 
+struct CustomDatePicker: View {
+    
+    @Binding var selection: Date
+    
+    let title: String
+    let icon: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.system(size: 15, design: .rounded))
+                .fontWeight(.semibold)
+            
+            HStack(spacing: 10) {
+                Image(systemName: icon)
+                    .foregroundColor(.blue)
+                    .frame(width: 20)
+                
+                DatePicker("", selection: $selection, displayedComponents: .date)
+                    .labelsHidden()
+                    .font(.system(.body, design: .rounded))
+                
+                Spacer()
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+        }
+    }
+}
+
+struct CustomGenderPicker: View {
+    
+    let options = ["Male", "Female"]
+    
+    @Binding var selectedGender: String
+    
+    let title: String
+    let icon: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.system(size: 15, design: .rounded))
+                .fontWeight(.semibold)
+            
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .foregroundColor(.blue)
+                    .frame(width: 20)
+                
+                HStack(spacing: 20) {
+                    ForEach(options, id: \.self) { option in
+                        Button(action: {
+                            selectedGender = option
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: selectedGender == option ? "largecircle.fill.circle" : "circle")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(selectedGender == option ? .blue : .gray)
+                                
+                                // The Label
+                                Text(option)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.primary)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+        }
+    }
+}
 
 //struct CustomTextField_Preview: PreviewProvider {
 //    static var previews: some View {

@@ -5,15 +5,27 @@
 //  Created by iPHTech6 on 07/07/26.
 //
 
+
 import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var selectedTab = 0
     
     @FetchRequest(
         entity: Student.entity(), sortDescriptors: []
     ) var student : FetchedResults<Student>
+    
+    @FetchRequest(
+        entity: Acadamics.entity(), sortDescriptors: []
+    ) var acadamic : FetchedResults<Acadamics>
+    
+    private func checkForEmptyData() {
+        if student.isEmpty {
+            Student.createDummyStudent(in: viewContext)
+        }
+    }
     
     var body: some View {
         
@@ -23,46 +35,54 @@ struct ContentView: View {
             
             NavigationView{
                 ZStack {
-                  
-                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5),Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/)
-                    .ignoresSafeArea()
+                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
+                        .ignoresSafeArea()
                     
-                    VStack(spacing: 20) {
+                    VStack(spacing: 10) {
                         HeaderView()
                             .padding(.horizontal, 20)
                         
-                        CardView{
-                            UserProfileView(student: currentStudent)
-                                .padding(.bottom,20)
-                            
-                            Section {
-                                UserAboutView()
-                                    .padding(.leading,8)
+                        CardView {
+                            // data found
+                             if let validStudent = currentStudent {
+                                UserProfileView(student: validStudent)
+                                    .padding(.bottom, 20)
                                 
-                                Divider()
-                                    .padding(.top, 10)
-                            }
-                            Section {
-                                AcadamicInfoView()
+                                Section {
+                                    UserAboutView()
+                                        .padding(.leading, 8)
+                                    
+                                    Divider()
+                                        .padding(.top, 10)
+                                }
                                 
-                                Divider()
-                                    .padding(.top, 10)
-                                
-//                                SkillView()
-//                                    .padding(.top,20)
-//                                    .padding(.leading,8)
-//
-//                                SubjectView()
-//                                    .padding(.top,20)
-//                                    .padding(.leading,8)
-                                UserPersonalView()
-                                
-                                
+                                Section {
+                                    AcadamicInfoView(selectedTab: $selectedTab)
+                                    
+                                    Divider()
+                                        .padding(.top, 10)
+                                    
+                                    UserPersonalView(student: validStudent)
+                                }
+                            } else {
+                                // loading if data not found
+                                VStack(spacing: 12) {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                    Text("Loading Profile...")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 40)
                             }
                         }
                     }
                 }
                 .navigationBarHidden(true)
+                .onAppear {
+                    checkForEmptyData()
+                }
             
             }.tabItem {
                 Label("Home", systemImage: "house.fill")
@@ -78,10 +98,9 @@ struct ContentView: View {
             .tag(1)
             
         }.environment(\.currentStudent, currentStudent)
+        
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

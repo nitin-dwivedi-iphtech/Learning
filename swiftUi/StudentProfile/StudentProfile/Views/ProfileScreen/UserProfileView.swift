@@ -7,25 +7,24 @@
 
 import SwiftUI
 
-// Understand this
-struct UserProfileData: View{
+// Handels the data fetching and passing to UserProfileView view
+struct UserProfileLoader: View{
     @Environment(\.currentStudent) private var currentStudent
-        
+    @State var showAlert: Bool
         var body: some View {
             if let student = currentStudent {
                 UserProfileView(student: student)
-            } else {
-                UserProfileView(student: nil)
             }
         }
 }
+
+
 
 struct UserProfileView: View {
     
     @ObservedObject var student: Student
         
-    init?(student: Student?) {
-        guard let student = student else { return nil }
+    init?(student:Student){
         self.student = student
     }
     
