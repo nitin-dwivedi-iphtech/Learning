@@ -63,8 +63,11 @@ struct DetailAcadamicView: View {
                                 accentColor: .orange
                         )
                             
-                            Divider().padding(.vertical)
+                        Divider().padding(.vertical)
                         
+                        SkillView()
+                            
+                        Divider().padding(.vertical)
                         
                         // MARK: - Enrolled Subjects Section
                         DetailAcadamicEnrolledSubjectView()

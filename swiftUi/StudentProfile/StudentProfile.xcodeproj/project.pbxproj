@@ -27,7 +27,6 @@
 		219A37792FFD0A4300429F8B /* UserAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37782FFD0A4300429F8B /* UserAboutView.swift */; };
 		219A377C2FFD0AD000429F8B /* SkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A377B2FFD0AD000429F8B /* SkillsView.swift */; };
 		219A37802FFD14B900429F8B /* SkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A377F2FFD14B900429F8B /* SkillModel.swift */; };
-		219A378A2FFD167B00429F8B /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37892FFD167B00429F8B /* SubjectView.swift */; };
 		219A378D2FFD16BF00429F8B /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A378C2FFD16BF00429F8B /* SubjectModel.swift */; };
 		219A37902FFD1DA800429F8B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A378F2FFD1DA800429F8B /* HeaderView.swift */; };
 		219A37972FFD247500429F8B /* ProfileSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37962FFD247500429F8B /* ProfileSetting.swift */; };
@@ -68,7 +67,6 @@
 		219A37782FFD0A4300429F8B /* UserAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAboutView.swift; sourceTree = "<group>"; };
 		219A377B2FFD0AD000429F8B /* SkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsView.swift; sourceTree = "<group>"; };
 		219A377F2FFD14B900429F8B /* SkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModel.swift; sourceTree = "<group>"; };
-		219A37892FFD167B00429F8B /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
 		219A378C2FFD16BF00429F8B /* SubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
 		219A378F2FFD1DA800429F8B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		219A37962FFD247500429F8B /* ProfileSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetting.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				219A37752FFD096000429F8B /* UserProfileView.swift */,
 				219A37782FFD0A4300429F8B /* UserAboutView.swift */,
 				219A377B2FFD0AD000429F8B /* SkillsView.swift */,
-				219A37892FFD167B00429F8B /* SubjectView.swift */,
 				219A378F2FFD1DA800429F8B /* HeaderView.swift */,
 				21B9F5262FFE4BE500C084EF /* AcadamicInfoView.swift */,
 				21B9F5292FFE56C300C084EF /* UserPersonalView.swift */,
@@ -328,7 +325,6 @@
 				219A37762FFD096000429F8B /* UserProfileView.swift in Sources */,
 				219A379B2FFD2DCC00429F8B /* ProfileEditView.swift in Sources */,
 				2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */,
-				219A378A2FFD167B00429F8B /* SubjectView.swift in Sources */,
 				21B9F5212FFE2B0800C084EF /* HeroSectionView.swift in Sources */,
 				2138A74A2FFFAAA50025A8AC /* AcadamicInstitutionEditView.swift in Sources */,
 				21B9F51E2FFE2ACC00C084EF /* UserEditFieldsView.swift in Sources */,
