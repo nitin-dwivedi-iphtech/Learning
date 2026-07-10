@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Skills : Hashable, Identifiable{
-    let id = UUID()
-    let name:String
-    let image:String
-}
+//struct Skills : Hashable, Identifiable{
+//    let id = UUID()
+//    let name:String
+//    let image:String
+//}

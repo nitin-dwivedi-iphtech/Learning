@@ -9,20 +9,24 @@ import SwiftUI
 
 struct AcadamicEdit_Id_Performance: View {
     @Binding var studentID: String
-    @Binding var currentCGPA: String
-    @Binding var attendanceRate: String
+    @Binding var currentCGPA: Float
+    @Binding var attendanceRate: Float
+    
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
     
     var body: some View {
         Section(header: Text("Academic Metrics")) {
-            AcademicInputField(label: "Student ID", text: $studentID, placeholder: "STU-YYYY-XXXX")
-                .keyboardType(.numbersAndPunctuation)
-            
             HStack {
                 Text("Current CGPA")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 Spacer()
-                TextField("0.00", text: $currentCGPA)
+                TextField("0.00", value: $currentCGPA, formatter: numberFormatter)
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.trailing)
                     .font(.body)
@@ -35,7 +39,7 @@ struct AcadamicEdit_Id_Performance: View {
                     .foregroundColor(.secondary)
                 Spacer()
                 HStack(spacing: 3) {
-                    TextField("100", text: $attendanceRate)
+                    TextField("100", value: $attendanceRate, formatter: numberFormatter)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
                         .foregroundColor(.primary)

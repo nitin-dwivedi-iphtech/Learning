@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		134CB3BB2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */; };
+		13DA891A3000CEE000982B69 /* AcadamicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA89193000CED300982B69 /* AcadamicModel.swift */; };
 		2138A72A2FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */; };
 		2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */; };
 		2138A7332FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicInstitutionView.swift; sourceTree = "<group>"; };
+		13DA89193000CED300982B69 /* AcadamicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcadamicModel.swift; sourceTree = "<group>"; };
 		2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicHeaderView.swift; sourceTree = "<group>"; };
 		2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicCoreMetrixView.swift; sourceTree = "<group>"; };
 		2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicEnrolledSubjectView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				219A377F2FFD14B900429F8B /* SkillModel.swift */,
 				219A378C2FFD16BF00429F8B /* SubjectModel.swift */,
 				219A37962FFD247500429F8B /* ProfileSetting.swift */,
+				13DA89193000CED300982B69 /* AcadamicModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				219A37762FFD096000429F8B /* UserProfileView.swift in Sources */,
 				219A379B2FFD2DCC00429F8B /* ProfileEditView.swift in Sources */,
 				2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */,
+				13DA891A3000CEE000982B69 /* AcadamicModel.swift in Sources */,
 				21B9F5212FFE2B0800C084EF /* HeroSectionView.swift in Sources */,
 				2138A74A2FFFAAA50025A8AC /* AcadamicInstitutionEditView.swift in Sources */,
 				21B9F51E2FFE2ACC00C084EF /* UserEditFieldsView.swift in Sources */,

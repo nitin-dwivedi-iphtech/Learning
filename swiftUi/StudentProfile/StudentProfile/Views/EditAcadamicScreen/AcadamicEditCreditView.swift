@@ -7,26 +7,36 @@
 
 import SwiftUI
 
-struct AcadamicEditCreditView: View {
+struct AcademicEditCreditView: View {
     
-    @Binding var completedCredits:Double
+    @Binding var completedCredits: Int16
     let totalRequiredCredits: Double = 90
     
     var body: some View {
+        
+        // double proxy binding
+        let sliderBinding = Binding<Double>(
+            get: { Double(completedCredits) },
+            set: { completedCredits = Int16($0) }
+        )
+        
         Section(header: Text("Credit Progress")) {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Text("Completed Credits")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                    
                     Spacer()
+                    
                     Text("\(Int(completedCredits)) / \(Int(totalRequiredCredits))")
                         .font(.body)
                         .bold()
                         .foregroundColor(.primary)
                 }
                 
-                Slider(value: $completedCredits, in: 0...totalRequiredCredits, step: 1)
+                // Pass our type-safe proxy binding here
+                Slider(value: sliderBinding, in: 0...totalRequiredCredits, step: 1)
                     .accentColor(.orange)
             }
             .padding(.vertical, 4)
@@ -34,8 +44,10 @@ struct AcadamicEditCreditView: View {
     }
 }
 
-//struct AcadamicEditCreditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AcadamicEditCreditView()
-//    }
-//}
+struct AcademicEditCreditView_Previews: PreviewProvider {
+    static var previews: some View {
+        Form {
+            AcademicEditCreditView(completedCredits: .constant(75))
+        }
+    }
+}

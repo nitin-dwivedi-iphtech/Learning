@@ -13,7 +13,7 @@ struct AcadamicInstitutionEditView: View {
     @Binding var courseName:String
     @Binding var currentSemester:String
     
-    let semesters = ["Semester I", "Semester II", "Semester III", "Semester IV"]
+    let semesters = ["I", "II", "III", "IV"]
     
     
     var body: some View {
@@ -21,19 +21,14 @@ struct AcadamicInstitutionEditView: View {
             AcademicInputField(label: "University", text: $universityName, placeholder: "Enter University Name")
             AcademicInputField(label: "Department", text: $departmentName, placeholder: "Enter Department")
             AcademicInputField(label: "Course / Degree", text: $courseName, placeholder: "Enter Course Name")
-            HStack{
-                Picker("Current Semester", selection: $currentSemester) {
-                    ForEach(semesters, id: \.self) { sem in
-                        Text(sem).tag(sem)
-                    }
+         
+            Picker("Current Semester", selection: $currentSemester) {
+                ForEach(semesters, id: \.self) { sem in
+                    Text("Semester \(sem)").tag(sem)
                 }
-                .pickerStyle(MenuPickerStyle())
-                
-                Spacer()
-                
-                Text("\(currentSemester)")
-                    .font(.system(size:15))
             }
+            .pickerStyle(MenuPickerStyle())
+            
         }
     }
 }

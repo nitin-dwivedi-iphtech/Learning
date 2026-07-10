@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailAcadamicHeaderView: View {
     
+    @ObservedObject var acadamicModel:AcadamicModel
     
     var body: some View {
         HStack(alignment:.center) {
@@ -17,7 +18,7 @@ struct DetailAcadamicHeaderView: View {
                 .font(.system(size: 26, weight: .bold, design: .rounded))
                 .padding(.leading)
             Spacer()
-            NavigationLink(destination:AcadamicEditView()){
+            NavigationLink(destination:AcadamicEditView(acadamicModel: acadamicModel)){
                 Image(systemName: "pencil.circle.fill")
                     .font(.title)
                     .foregroundColor(.blue)
@@ -33,6 +34,6 @@ struct DetailAcadamicHeaderView: View {
 
 struct DetailAcadamicHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailAcadamicHeaderView()
+        DetailAcadamicHeaderView(acadamicModel: AcadamicModel.shared)
     }
 }

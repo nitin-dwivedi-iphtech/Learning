@@ -5,25 +5,32 @@
 //  Created by iPHTech6 on 07/07/26.
 //
 
+//
+//  ContentView.swift
+//  StudentProfile
+//
+//  Created by iPHTech6 on 07/07/26.
+//
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject private var academicModel = AcadamicModel.shared
     @State private var selectedTab = 0
     
     @FetchRequest(
         entity: Student.entity(), sortDescriptors: []
     ) var student : FetchedResults<Student>
     
-    @FetchRequest(
-        entity: Acadamics.entity(), sortDescriptors: []
-    ) var acadamic : FetchedResults<Acadamics>
-    
     private func checkForEmptyData() {
         if student.isEmpty {
             Student.createDummyStudent(in: viewContext)
+            Acadamics.createDummyAcadamics(in: viewContext)
+            
+            try? viewContext.save()
         }
     }
     
@@ -31,9 +38,9 @@ struct ContentView: View {
         
         let currentStudent = student.first
         
-        TabView(selection:$selectedTab){
+        TabView(selection: $selectedTab) {
             
-            NavigationView{
+            NavigationView {
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
                         .ignoresSafeArea()
@@ -44,7 +51,7 @@ struct ContentView: View {
                         
                         CardView {
                             // data found
-                             if let validStudent = currentStudent {
+                            if let validStudent = currentStudent {
                                 UserProfileView(student: validStudent)
                                     .padding(.bottom, 20)
                                 
@@ -57,7 +64,7 @@ struct ContentView: View {
                                 }
                                 
                                 Section {
-                                    AcadamicInfoView(selectedTab: $selectedTab)
+                                    AcadamicInfoView(selectedTab: $selectedTab, acadamicModel: academicModel)
                                     
                                     Divider()
                                         .padding(.top, 10)
@@ -82,22 +89,43 @@ struct ContentView: View {
                 .navigationBarHidden(true)
                 .onAppear {
                     checkForEmptyData()
+                    if let validStudent = student.first, let studentId = validStudent.studentId {
+                        academicModel.configure(studentId: studentId, context: viewContext)
+                    }
                 }
-            
+                .onChange(of: student.first) { newStudent in
+                    if let validStudent = newStudent, let studentId = validStudent.studentId {
+                        academicModel.configure(studentId: studentId, context: viewContext)
+                    }
+                }
+                
             }.tabItem {
                 Label("Home", systemImage: "house.fill")
             }
             .tag(0)
             
             // Acadamic View
-            NavigationView{
-                DetailAcadamicView()
+            NavigationView {
+                if currentStudent != nil {
+                    DetailAcadamicView(academicModel: academicModel)
+                } else {
+                    VStack(spacing: 12) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                        Text("Loading Profile...")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 40)
+                }
             }.tabItem {
                 Label("Acadamics", systemImage: "graduationcap.fill")
             }
             .tag(1)
             
-        }.environment(\.currentStudent, currentStudent)
+        }
+        .environment(\.currentStudent, currentStudent)
         
     }
 }

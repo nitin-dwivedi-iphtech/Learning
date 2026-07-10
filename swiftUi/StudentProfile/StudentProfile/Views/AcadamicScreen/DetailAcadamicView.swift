@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 // Model structure for clean representation of subjects
 struct Subjec: Identifiable {
@@ -18,18 +19,11 @@ struct Subjec: Identifiable {
 }
 
 struct DetailAcadamicView: View {
-    // Mock / Static Data matching an MCA student portfolio
-        let universityName = "Stanford University"
-        let departmentName = "Department of Computer Science"
-        let courseName = "Master of Computer Applications"
-        let currentSemester = "Semester IV"
-        let studentID = "STU-2026-8942"
-        let currentCGPA = "9.24"
-        let attendanceRate = "94%"
-        let completedCredits = "78 / 90"
+
         
-        @Environment(\.presentationMode) var presentationMode
-        
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var academicModel: AcadamicModel
+    
         // Dynamic list for enrolled subjects
         let subjects = [
             Subjec(code: "MCA-401", name: "Advanced Software Engineering", credits: 4, iconName: "terminal.fill", tintColor: .purple),
@@ -37,27 +31,31 @@ struct DetailAcadamicView: View {
             Subjec(code: "MCA-403", name: "Big Data Analytics", credits: 3, iconName: "chart.pie.fill", tintColor: .orange),
             Subjec(code: "MCA-499", name: "Major Project / Dissertation", credits: 6, iconName: "doc.text.below.ecg.fill", tintColor: .pink)
         ]
+    
         
         var body: some View {
+            
+            let firstRecord = academicModel.acadamics.first
+            
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
                 
                     VStack(alignment: .center, spacing: 5) {
                         
-                         DetailAcadamicHeaderView()
+                         DetailAcadamicHeaderView(acadamicModel: academicModel)
                         
                         ScrollView(.vertical, showsIndicators: false) {
                             
-                            DetailAcadamicInstitutionView()
+                            DetailAcadamicInstitutionView(acadamicModel: academicModel)
                             
                             
-                            DetailAcadamicCoreMetrixView()
+                            DetailAcadamicCoreMetrixView(academicModel: academicModel)
                             
                             
                             PerformanceMetricBox(
                                 title: "Completed Credits",
-                                value: completedCredits,
+                                value: "\(firstRecord?.creditsCompleted ?? 0)",
                                 subtitle: "Required for graduation: 90 credits",
                                 icon: "trophy.fill",
                                 accentColor: .orange
@@ -75,15 +73,12 @@ struct DetailAcadamicView: View {
                             
                             // MARK: - Enrolled Subjects Section
                             
-                            DetailAcadamicEnrolledSubjectView()
+                            DetailAcadamicEnrolledSubjectView(academicModel: academicModel)
                             
                         }
                     
                         .padding(.horizontal, 16)
-                    
                         .padding(.top, 8)
-                    
-                        .padding(.bottom, 10)
                 }
             }.navigationBarHidden(true)
         }
@@ -91,6 +86,6 @@ struct DetailAcadamicView: View {
 
 struct DetailAcadamicView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailAcadamicView()
+        DetailAcadamicView(academicModel: AcadamicModel.shared)
     }
 }

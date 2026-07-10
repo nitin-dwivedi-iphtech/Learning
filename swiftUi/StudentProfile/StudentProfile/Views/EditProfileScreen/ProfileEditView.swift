@@ -50,7 +50,7 @@ struct ProfileEditView : View {
                     UserEditHeaderView()
                     
                     ScrollView{
-                        HeroSectionView()
+                        HeroSectionView(name: $name, email: $email, phone: $phone, id: $id, dob: $dob, gender: $gender)
                         
                         UserImageView()
                         

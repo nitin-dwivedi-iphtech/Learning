@@ -18,6 +18,7 @@
         let attendanceRate = "94%"
         
         @Binding var selectedTab: Int
+        @ObservedObject var acadamicModel: AcadamicModel
         
         var body: some View {
             ZStack {
@@ -39,9 +40,9 @@
                                 }
                                 
                         }
-                        DetailAcadamicInstitutionView()
+                        DetailAcadamicInstitutionView(acadamicModel: acadamicModel)
                         
-                        DetailAcadamicCoreMetrixView()
+                        DetailAcadamicCoreMetrixView(academicModel: acadamicModel)
                         
                     }
                     .padding(.horizontal, 8)

@@ -10,12 +10,11 @@ import SwiftUI
 // Handels the data fetching and passing to UserProfileView view
 struct UserProfileLoader: View{
     @Environment(\.currentStudent) private var currentStudent
-    @State var showAlert: Bool
-        var body: some View {
-            if let student = currentStudent {
-                UserProfileView(student: student)
-            }
+    var body: some View {
+        if let student = currentStudent {
+            UserProfileView(student: student)
         }
+    }
 }
 
 
@@ -24,7 +23,7 @@ struct UserProfileView: View {
     
     @ObservedObject var student: Student
         
-    init?(student:Student){
+    init(student:Student){
         self.student = student
     }
     

@@ -10,6 +10,8 @@ import SwiftUI
 struct DetailAcadamicEnrolledSubjectView: View {
     
     
+    @ObservedObject var academicModel: AcadamicModel
+    
     let universityName = "Stanford University"
     let departmentName = "Department of Computer Science"
     let courseName = "Master of Computer Applications"
@@ -85,6 +87,6 @@ struct DetailAcadamicEnrolledSubjectView: View {
 
 struct DetailAcadamicEnrolledSubjectView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailAcadamicEnrolledSubjectView()
+        DetailAcadamicEnrolledSubjectView(academicModel: AcadamicModel.shared)
     }
 }
