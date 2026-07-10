@@ -6,69 +6,79 @@
 //
 
 import SwiftUI
-struct ProfileEditView : View {
+
+struct ProfileEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.currentStudent) var currentStudent
     @Environment(\.managedObjectContext) private var viewContext
+    
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var phone: String = ""
     @State private var id: String = ""
     @State private var dob: Date = Date()
-    @State private var gender: String  = ""
+    @State private var gender: String = ""
     @State private var showAlert = false
     
-    func validateField(name:String, email:String, phone:String)->Bool{
+    func validateField(name: String, email: String, phone: String) -> Bool {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
-            let trimmedPhone = phone.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            if trimmedName.isEmpty || trimmedEmail.isEmpty || trimmedPhone.isEmpty {
-                return false
-            }
-            
-             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-            let isEmailValid = emailPredicate.evaluate(with: trimmedEmail)
-            
-             let phoneRegex = "^[0-9]{10}$"
-            let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-            let isPhoneValid = phonePredicate.evaluate(with: trimmedPhone)
-            
-             return isEmailValid && isPhoneValid
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPhone = phone.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if trimmedName.isEmpty || trimmedEmail.isEmpty || trimmedPhone.isEmpty {
+            return false
+        }
+        
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        let isEmailValid = emailPredicate.evaluate(with: trimmedEmail)
+        
+        let phoneRegex = "^[0-9]{10}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        let isPhoneValid = phonePredicate.evaluate(with: trimmedPhone)
+        
+        return isEmailValid && isPhoneValid
     }
     
-    var body:some View{
-        ZStack{
-            LinearGradient(gradient: Gradient(colors: [Color("BrandWhite").opacity(0.5), Color.white.opacity(0.5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color("BrandWhite").opacity(0.5), Color.white.opacity(0.5)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
             .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 
-                VStack(alignment:.center, spacing:20){
-                    UserEditHeaderView()
-                    
-                    ScrollView{
+                 UserEditHeaderView()
+                    .padding(.top, 10)
+                
+                ScrollView {
+                    VStack(spacing: 20) {
                         HeroSectionView(name: $name, email: $email, phone: $phone, id: $id, dob: $dob, gender: $gender)
                         
                         UserImageView()
                         
-                        CardView{
+                        CardView {
                             UserEditFieldsView(inputName: $name, inputEmail: $email, inputPhone: $phone, inputId: $id, inputDate: $dob, inputGender: $gender)
                                 .padding(.horizontal, 20)
                                 .padding(.bottom, 30)
                         }
                     }
+                    .padding(.top, 12)
                 }
                 
                 Spacer(minLength: 10)
                 
                 Button(action: {
-                     if validateField(name: name, email: email, phone: phone) {
-                        saveData(name: name, email: email, phone: phone,id:id,gender: gender, dob: dob, student:currentStudent, viewContext:viewContext)
+                    if validateField(name: name, email: email, phone: phone) {
+                        
+                        saveData(name: name, email: email, phone: phone, id: id, gender: gender, dob: dob, student: currentStudent, viewContext: viewContext)
                         
                         self.presentationMode.wrappedValue.dismiss()
+                        
                     } else {
                         self.showAlert = true
                     }
@@ -82,7 +92,7 @@ struct ProfileEditView : View {
                         .cornerRadius(12)
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 15)
+                .padding(.vertical, 15)
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("Invalid Input"),
@@ -91,10 +101,8 @@ struct ProfileEditView : View {
                     )
                 }
             }
-            
         }
-        .navigationBarHidden(true)
-        .onAppear{
+        .onAppear {
             self.name = currentStudent?.username ?? ""
             self.email = currentStudent?.userEmail ?? ""
             self.phone = currentStudent?.userPhone ?? ""
@@ -103,9 +111,8 @@ struct ProfileEditView : View {
     }
 }
 
-
-struct ProfileEdit_Preview : PreviewProvider{
-    static var previews:some View{
+struct ProfileEdit_Preview: PreviewProvider {
+    static var previews: some View {
         ProfileEditView()
             .environmentObject(ProfileSetting())
     }

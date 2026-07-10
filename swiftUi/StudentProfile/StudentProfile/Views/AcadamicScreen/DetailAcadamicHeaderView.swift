@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailAcadamicHeaderView: View {
     
+    @State private var isShowingEditSheet = false
     @ObservedObject var acadamicModel:AcadamicModel
     
     var body: some View {
@@ -18,16 +19,20 @@ struct DetailAcadamicHeaderView: View {
                 .font(.system(size: 26, weight: .bold, design: .rounded))
                 .padding(.leading)
             Spacer()
-            NavigationLink(destination:AcadamicEditView(acadamicModel: acadamicModel)){
-                Image(systemName: "pencil.circle.fill")
-                    .font(.title)
-                    .foregroundColor(.blue)
-                    .padding(.all,5)
-                    .clipShape(Circle())
-            }
+            Image(systemName: "pencil.circle.fill")
+                .font(.title)
+                .foregroundColor(.blue)
+                .padding(.all,5)
+                .clipShape(Circle())
+                .onTapGesture{
+                    isShowingEditSheet = true
+                }
+            
         }
         .padding(.horizontal, 4)
-        
+        .sheet(isPresented: $isShowingEditSheet) {
+            AcadamicEditView(acadamicModel: acadamicModel)
+        }
         
     }
 }
