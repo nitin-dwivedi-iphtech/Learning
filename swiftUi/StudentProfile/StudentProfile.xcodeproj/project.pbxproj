@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		134CB3BB2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */; };
+		138E46CE3004AA9B00853F07 /* UserPdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E46CD3004AA9B00853F07 /* UserPdfView.swift */; };
+		138E46D03004B24A00853F07 /* GeneratePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E46CF3004B24500853F07 /* GeneratePDF.swift */; };
+		138E46D23004BDF700853F07 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E46D13004BDF100853F07 /* ShareSheet.swift */; };
+		138E46D6300500D200853F07 /* EditSkillSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E46D5300500D200853F07 /* EditSkillSheetView.swift */; };
+		138E46DA3005109000853F07 /* StudentContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E46D93005108600853F07 /* StudentContactView.swift */; };
 		13DA891A3000CEE000982B69 /* AcadamicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA89193000CED300982B69 /* AcadamicModel.swift */; };
 		2138A72A2FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */; };
 		2138A7302FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */; };
@@ -27,8 +32,6 @@
 		219A37762FFD096000429F8B /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37752FFD096000429F8B /* UserProfileView.swift */; };
 		219A37792FFD0A4300429F8B /* UserAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37782FFD0A4300429F8B /* UserAboutView.swift */; };
 		219A377C2FFD0AD000429F8B /* SkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A377B2FFD0AD000429F8B /* SkillsView.swift */; };
-		219A37802FFD14B900429F8B /* SkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A377F2FFD14B900429F8B /* SkillModel.swift */; };
-		219A378D2FFD16BF00429F8B /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A378C2FFD16BF00429F8B /* SubjectModel.swift */; };
 		219A37902FFD1DA800429F8B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A378F2FFD1DA800429F8B /* HeaderView.swift */; };
 		219A37972FFD247500429F8B /* ProfileSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A37962FFD247500429F8B /* ProfileSetting.swift */; };
 		219A379B2FFD2DCC00429F8B /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A379A2FFD2DCC00429F8B /* ProfileEditView.swift */; };
@@ -47,6 +50,11 @@
 
 /* Begin PBXFileReference section */
 		134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicInstitutionView.swift; sourceTree = "<group>"; };
+		138E46CD3004AA9B00853F07 /* UserPdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPdfView.swift; sourceTree = "<group>"; };
+		138E46CF3004B24500853F07 /* GeneratePDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePDF.swift; sourceTree = "<group>"; };
+		138E46D13004BDF100853F07 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		138E46D5300500D200853F07 /* EditSkillSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSkillSheetView.swift; sourceTree = "<group>"; };
+		138E46D93005108600853F07 /* StudentContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentContactView.swift; sourceTree = "<group>"; };
 		13DA89193000CED300982B69 /* AcadamicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcadamicModel.swift; sourceTree = "<group>"; };
 		2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicHeaderView.swift; sourceTree = "<group>"; };
 		2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicCoreMetrixView.swift; sourceTree = "<group>"; };
@@ -68,8 +76,6 @@
 		219A37752FFD096000429F8B /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		219A37782FFD0A4300429F8B /* UserAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAboutView.swift; sourceTree = "<group>"; };
 		219A377B2FFD0AD000429F8B /* SkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsView.swift; sourceTree = "<group>"; };
-		219A377F2FFD14B900429F8B /* SkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModel.swift; sourceTree = "<group>"; };
-		219A378C2FFD16BF00429F8B /* SubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
 		219A378F2FFD1DA800429F8B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		219A37962FFD247500429F8B /* ProfileSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetting.swift; sourceTree = "<group>"; };
 		219A379A2FFD2DCC00429F8B /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		138E46CA3004AA3500853F07 /* PdfShare */ = {
+			isa = PBXGroup;
+			children = (
+				138E46D13004BDF100853F07 /* ShareSheet.swift */,
+				138E46CF3004B24500853F07 /* GeneratePDF.swift */,
+				138E46CD3004AA9B00853F07 /* UserPdfView.swift */,
+			);
+			path = PdfShare;
+			sourceTree = "<group>";
+		};
 		2138A7352FFF875C0025A8AC /* EditAcadamicScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +169,7 @@
 		219A37702FFD08D300429F8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				138E46CA3004AA3500853F07 /* PdfShare */,
 				2138A7352FFF875C0025A8AC /* EditAcadamicScreen */,
 				21B9F52C2FFE5D9800C084EF /* AcadamicScreen */,
 				219A37992FFD2DAC00429F8B /* EditProfileScreen */,
@@ -165,8 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				21B9F5312FFE617400C084EF /* StudentProfileModel.xcdatamodeld */,
-				219A377F2FFD14B900429F8B /* SkillModel.swift */,
-				219A378C2FFD16BF00429F8B /* SubjectModel.swift */,
 				219A37962FFD247500429F8B /* ProfileSetting.swift */,
 				13DA89193000CED300982B69 /* AcadamicModel.swift */,
 			);
@@ -176,10 +191,10 @@
 		219A37862FFD15E100429F8B /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
+				138E46D93005108600853F07 /* StudentContactView.swift */,
 				219A37712FFD08EC00429F8B /* CardView.swift */,
 				219A37752FFD096000429F8B /* UserProfileView.swift */,
 				219A37782FFD0A4300429F8B /* UserAboutView.swift */,
-				219A377B2FFD0AD000429F8B /* SkillsView.swift */,
 				219A378F2FFD1DA800429F8B /* HeaderView.swift */,
 				21B9F5262FFE4BE500C084EF /* AcadamicInfoView.swift */,
 				21B9F5292FFE56C300C084EF /* UserPersonalView.swift */,
@@ -204,11 +219,13 @@
 		21B9F52C2FFE5D9800C084EF /* AcadamicScreen */ = {
 			isa = PBXGroup;
 			children = (
+				219A377B2FFD0AD000429F8B /* SkillsView.swift */,
+				138E46D5300500D200853F07 /* EditSkillSheetView.swift */,
 				21B9F52D2FFE5DBD00C084EF /* DetailAcadamicView.swift */,
 				2138A7292FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift */,
 				2138A72F2FFF80B70025A8AC /* DetailAcadamicCoreMetrixView.swift */,
-				2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */,
 				134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */,
+				2138A7322FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift */,
 			);
 			path = AcadamicScreen;
 			sourceTree = "<group>";
@@ -304,17 +321,20 @@
 				2138A7422FFFA9140025A8AC /* AcademicInputField.swift in Sources */,
 				2138A73F2FFFA3C20025A8AC /* ProfileUnavailableView.swift in Sources */,
 				21B9F5182FFE2A4200C084EF /* UserEditHeaderView.swift in Sources */,
+				138E46D23004BDF700853F07 /* ShareSheet.swift in Sources */,
 				2138A7332FFF81A20025A8AC /* DetailAcadamicEnrolledSubjectView.swift in Sources */,
+				138E46DA3005109000853F07 /* StudentContactView.swift in Sources */,
 				2138A7452FFFA95A0025A8AC /* AcadamicEditHeaderView.swift in Sources */,
 				21B9F5332FFE617400C084EF /* StudentProfileModel.xcdatamodeld in Sources */,
 				2138A7372FFF877F0025A8AC /* AcadamicEditView.swift in Sources */,
 				219A377C2FFD0AD000429F8B /* SkillsView.swift in Sources */,
+				138E46D6300500D200853F07 /* EditSkillSheetView.swift in Sources */,
 				219A37632FFCDC1400429F8B /* ContentView.swift in Sources */,
 				219A37972FFD247500429F8B /* ProfileSetting.swift in Sources */,
 				219A37722FFD08EC00429F8B /* CardView.swift in Sources */,
 				21B9F52A2FFE56C300C084EF /* UserPersonalView.swift in Sources */,
 				134CB3BB2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift in Sources */,
-				219A37802FFD14B900429F8B /* SkillModel.swift in Sources */,
+				138E46D03004B24A00853F07 /* GeneratePDF.swift in Sources */,
 				21B9F5242FFE2B3300C084EF /* UserImageView.swift in Sources */,
 				2138A72A2FFF7F6B0025A8AC /* DetailAcadamicHeaderView.swift in Sources */,
 				219A37612FFCDC1400429F8B /* StudentProfileApp.swift in Sources */,
@@ -322,7 +342,6 @@
 				219A37902FFD1DA800429F8B /* HeaderView.swift in Sources */,
 				21B9F52E2FFE5DBD00C084EF /* DetailAcadamicView.swift in Sources */,
 				2138A7502FFFACD70025A8AC /* AcadamicEditCreditView.swift in Sources */,
-				219A378D2FFD16BF00429F8B /* SubjectModel.swift in Sources */,
 				21B9F53B2FFE626400C084EF /* PersistenceController.swift in Sources */,
 				219A37792FFD0A4300429F8B /* UserAboutView.swift in Sources */,
 				219A37762FFD096000429F8B /* UserProfileView.swift in Sources */,
@@ -331,6 +350,7 @@
 				13DA891A3000CEE000982B69 /* AcadamicModel.swift in Sources */,
 				21B9F5212FFE2B0800C084EF /* HeroSectionView.swift in Sources */,
 				2138A74A2FFFAAA50025A8AC /* AcadamicInstitutionEditView.swift in Sources */,
+				138E46CE3004AA9B00853F07 /* UserPdfView.swift in Sources */,
 				21B9F51E2FFE2ACC00C084EF /* UserEditFieldsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

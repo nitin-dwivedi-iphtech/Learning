@@ -20,6 +20,7 @@ struct Subjec: Identifiable {
 struct DetailAcadamicView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.currentStudent) private var currentStudent: Student?
     @ObservedObject var academicModel: AcadamicModel
     
     // Dynamic list for enrolled subjects

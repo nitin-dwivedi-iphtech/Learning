@@ -9,25 +9,17 @@ import SwiftUI
 
 struct DetailAcadamicEnrolledSubjectView: View {
     
-    
     @ObservedObject var academicModel: AcadamicModel
     
-    let universityName = "Stanford University"
-    let departmentName = "Department of Computer Science"
-    let courseName = "Master of Computer Applications"
-    let currentSemester = "Semester IV"
-    let studentID = "STU-2026-8942"
-    let currentCGPA = "9.24"
-    let attendanceRate = "94%"
-    let completedCredits = "78 / 90"
-    
-    let subjects = [
-        Subjec(code: "MCA-401", name: "Advanced Software Engineering", credits: 4, iconName: "terminal.fill", tintColor: .purple),
-        Subjec(code: "MCA-402", name: "Cloud Computing & DevOps", credits: 4, iconName: "cloud.fill", tintColor: .blue),
-        Subjec(code: "MCA-403", name: "Big Data Analytics", credits: 3, iconName: "chart.pie.fill", tintColor: .orange),
-        Subjec(code: "MCA-499", name: "Major Project / Dissertation", credits: 6, iconName: "doc.text.below.ecg.fill", tintColor: .pink)
-    ]
-    
+    private var coreDataSubjects: [Subjects] {
+        guard let currentAcademicRecord = academicModel.acadamics.first else { return [] }
+        
+        if let subjectSet = currentAcademicRecord.subjectRecord as? Set<Subjects> {
+            return Array(subjectSet)
+        }
+        
+        return []
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -36,45 +28,53 @@ struct DetailAcadamicEnrolledSubjectView: View {
                 .padding(.horizontal, 4)
             
             VStack(spacing: 0) {
-                ForEach(subjects) { subject in
-                    HStack(spacing: 14) {
-                        Image(systemName: subject.iconName)
-                            .font(.system(size: 18))
-                            .foregroundColor(subject.tintColor)
-                            .frame(width: 36, height: 36)
-                            .background(subject.tintColor.opacity(0.12))
-                            .cornerRadius(10)
-                        
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text(subject.name)
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                                .foregroundColor(.primary)
-                                .lineLimit(1)
+                if coreDataSubjects.isEmpty {
+                    Text("No Enrolled Subjects Found")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundColor(.secondary)
+                        .padding(.vertical, 24)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                } else {
+                    ForEach(coreDataSubjects, id: \.objectID) { subject in
+                        HStack(spacing: 14) {
+                            Image(systemName: subject.subjectIcon ?? "book.closed.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(.blue)
+                                .frame(width: 36, height: 36)
+                                .background(Color.blue.opacity(0.12))
+                                .cornerRadius(10)
                             
-                            HStack(spacing: 8) {
-                                Text(subject.code)
-                                    .font(.system(.caption, design: .monospaced))
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 2)
-                                    .background(Color(.secondarySystemFill))
-                                    .cornerRadius(4)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(subject.subjectName ?? "Unknown Subject")
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                    .foregroundColor(.primary)
+                                    .lineLimit(1)
                                 
-                                Text("•   \(subject.credits) Credits")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.secondary)
+                                HStack(spacing: 8) {
+                                    Text("\(subject.subjectCode)")
+                                        .font(.system(.caption, design: .monospaced))
+                                        .padding(.horizontal, 5)
+                                        .padding(.vertical, 2)
+                                        .background(Color(.secondarySystemFill))
+                                        .cornerRadius(4)
+                                    
+                                    Text("•   \(subject.credits) Credits")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.secondary)
+                                }
                             }
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(Color(.lightGray))
                         }
-                        Spacer()
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 16)
                         
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(Color(.lightGray))
-                    }
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                    
-                    if subject.id != subjects.last?.id {
-                        Divider().padding(.leading, 66)
+                        if subject.objectID != coreDataSubjects.last?.objectID {
+                            Divider().padding(.leading, 66)
+                        }
                     }
                 }
             }

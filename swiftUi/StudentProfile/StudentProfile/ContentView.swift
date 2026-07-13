@@ -5,41 +5,23 @@
 //  Created by iPHTech6 on 07/07/26.
 //
 
-//
-//  ContentView.swift
-//  StudentProfile
-//
-//  Created by iPHTech6 on 07/07/26.
-//
-
 import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject private var academicModel = AcadamicModel.shared
     @State private var selectedTab = 0
     
+    
     @FetchRequest(
         entity: Student.entity(), sortDescriptors: []
-    ) var student : FetchedResults<Student>
-    
-    private func checkForEmptyData() {
-        if student.isEmpty {
-            Student.createDummyStudent(in: viewContext)
-            Acadamics.createDummyAcadamics(in: viewContext)
-            
-            try? viewContext.save()
-        }
-    }
+    ) var student: FetchedResults<Student>
     
     var body: some View {
-        
         let currentStudent = student.first
         
         TabView(selection: $selectedTab) {
-            
             NavigationView {
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
@@ -50,7 +32,6 @@ struct ContentView: View {
                             .padding(.horizontal, 20)
                         
                         CardView {
-                            // data found
                             if let validStudent = currentStudent {
                                 UserProfileView(student: validStudent)
                                     .padding(.bottom, 20)
@@ -72,7 +53,7 @@ struct ContentView: View {
                                     UserPersonalView(student: validStudent)
                                 }
                             } else {
-                                // loading if data not found
+                                
                                 VStack(spacing: 12) {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle())
@@ -88,7 +69,6 @@ struct ContentView: View {
                 }
                 .navigationBarHidden(true)
                 .onAppear {
-                    checkForEmptyData()
                     if let validStudent = student.first, let studentId = validStudent.studentId {
                         academicModel.configure(studentId: studentId, context: viewContext)
                     }
@@ -104,10 +84,10 @@ struct ContentView: View {
             }
             .tag(0)
             
-            // Acadamic View
             NavigationView {
-                if currentStudent != nil {
+                if let validStudent = currentStudent {
                     DetailAcadamicView(academicModel: academicModel)
+                        .environment(\.currentStudent, validStudent)
                 } else {
                     VStack(spacing: 12) {
                         ProgressView()
@@ -123,10 +103,8 @@ struct ContentView: View {
                 Label("Acadamics", systemImage: "graduationcap.fill")
             }
             .tag(1)
-            
         }
         .environment(\.currentStudent, currentStudent)
-        
     }
 }
 

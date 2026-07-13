@@ -7,24 +7,9 @@
 
 import SwiftUI
 
-struct UserPersonalLoader:View{
-    @Environment(\.currentStudent) var currentStudent
-    @State var showAlert: Bool
-    
-    var body: some View{
-        if let student = currentStudent{
-            UserProfileView(student:student)
-        }
-    }
-}
-
 struct UserPersonalView: View {
     
     @ObservedObject var student: Student
-        
-    init?(student:Student){
-        self.student = student
-    }
     
     var formattedDate: String {
         guard let dob = student.dob else {return "N/A"}

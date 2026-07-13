@@ -10,11 +10,20 @@
         <attribute name="institution" optional="YES" attributeType="String"/>
         <attribute name="studentId" optional="YES" attributeType="String"/>
         <relationship name="student" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="acadamicsRecord" inverseEntity="Student"/>
+        <relationship name="subjectRecord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subjects" inverseName="acad_sub" inverseEntity="Subjects"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="studentId"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="Skill" representedClassName="Skill" syncable="YES" codeGenerationType="class">
+        <attribute name="isTechnical" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="proficiency" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="skillImage" optional="YES" attributeType="String"/>
+        <attribute name="skillName" optional="YES" attributeType="String"/>
+        <attribute name="studentId" optional="YES" attributeType="String"/>
+        <relationship name="stud_Skill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="skillRecord" inverseEntity="Student"/>
     </entity>
     <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
         <attribute name="dob" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -24,9 +33,22 @@
         <attribute name="username" optional="YES" attributeType="String"/>
         <attribute name="userPhone" optional="YES" attributeType="String"/>
         <relationship name="acadamicsRecord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Acadamics" inverseName="student" inverseEntity="Acadamics"/>
+        <relationship name="skillRecord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Skill" inverseName="stud_Skill" inverseEntity="Skill"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="studentId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Subjects" representedClassName="Subjects" syncable="YES" codeGenerationType="class">
+        <attribute name="credits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subjectCode" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="subjectIcon" optional="YES" attributeType="String"/>
+        <attribute name="subjectName" optional="YES" attributeType="String"/>
+        <relationship name="acad_sub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Acadamics" inverseName="subjectRecord" inverseEntity="Acadamics"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="subjectCode"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>

@@ -39,6 +39,7 @@ struct HeroSectionView:View{
             
             ProgressView(value:progress)
                 .frame(maxWidth:.infinity)
+                .animation(.spring(response: 0.4, dampingFraction: 0.75), value: progress)
             
             Text("Complete you profile !")
                 .font(.system(size: 20,design: .rounded))
