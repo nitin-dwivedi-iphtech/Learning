@@ -14,4 +14,9 @@ class ProfileSetting:ObservableObject{
             objectWillChange.send()
         }
     }
+    @AppStorage("appDisplayTheme") var appDisplayTheme: Int = 0{
+        willSet{
+            objectWillChange.send()
+        }
+    }
 }

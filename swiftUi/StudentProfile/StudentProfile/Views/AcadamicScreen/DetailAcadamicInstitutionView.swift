@@ -23,18 +23,18 @@ struct DetailAcadamicInstitutionView: View {
                     .foregroundColor(.blue)
                     .tracking(1)
                 
-                Text("Master of Computer Applications")
+                Text(firstRecord?.course ?? "N/A")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                Text("Department of Computer Science")
+                Text(firstRecord?.departmentName ?? "N/A")
                     .font(.system(size: 13, design: .rounded))
                     .foregroundColor(.secondary)
                     .padding(.bottom, 12)
                 
                 HStack {
-                    Label("Semester IV", systemImage: "clock.fill")
+                    Label("Semester \(firstRecord?.currentSemester ?? "N/A")", systemImage: "clock.fill")
                     Spacer()
                     Text("STU-2026-8942")
                 }

@@ -46,13 +46,23 @@ struct SkillView: View {
     
     
     private var technicalSkills: [Skill] {
-        guard let currentId = currentStudent?.studentId else { return [] }
-        return fetchedSkills.filter { $0.studentId == currentId && $0.isTechnical && $0.skillName != nil && !$0.skillName!.isEmpty }
+        guard let currentStudent = currentStudent else { return [] }
+        return fetchedSkills.filter {
+            $0.stud_Skill == currentStudent &&
+            $0.isTechnical &&
+            $0.skillName != nil &&
+            !$0.skillName!.isEmpty
+        }
     }
     
     private var nonTechnicalSkills: [Skill] {
-        guard let currentId = currentStudent?.studentId else { return [] }
-        return fetchedSkills.filter { $0.studentId == currentId && !$0.isTechnical && $0.skillName != nil && !$0.skillName!.isEmpty }
+        guard let currentStudent = currentStudent else { return [] }
+        return fetchedSkills.filter {
+            $0.stud_Skill == currentStudent &&
+            !$0.isTechnical &&
+            $0.skillName != nil &&
+            !$0.skillName!.isEmpty
+        }
     }
     
     var body: some View {
