@@ -40,6 +40,9 @@ struct ContentView: View {
                                 Button(action: {
                                     withAnimation {
                                         userSetting.appDisplayTheme = (userSetting.appDisplayTheme + 1) % 3
+                                        if userSetting.appDisplayTheme == 0 {
+                                            userSetting.appDisplayTheme = 1
+                                        }
                                     }
                                 }) {
                                     Image(systemName: themeIconName)
@@ -134,19 +137,11 @@ struct ContentView: View {
     }
     
     private var themeIconName: String {
-        switch userSetting.appDisplayTheme {
-        case 1: return "sun.max.fill"
-        case 2: return "moon.fill"
-        default: return "circle.lefthalf.filled"
-        }
+        userSetting.appDisplayTheme == 2 ? "moon.fill" : "sun.max.fill"
     }
     
     private var selectedColorScheme: ColorScheme? {
-        switch userSetting.appDisplayTheme {
-        case 1: return .light
-        case 2: return .dark
-        default: return nil
-        }
+        userSetting.appDisplayTheme == 2 ? .dark : .light
     }
 }
 
