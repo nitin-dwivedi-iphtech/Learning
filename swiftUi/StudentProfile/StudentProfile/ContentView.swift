@@ -21,15 +21,7 @@ struct ContentView: View {
         entity: Student.entity(), sortDescriptors: []
     ) var student: FetchedResults<Student>
     
-    private var coreDataSubjects: [Subjects] {
-        guard let currentAcademicRecord = academicModel.acadamics.first else { return [] }
-        
-        if let subjectSet = currentAcademicRecord.subjectRecord as? Set<Subjects> {
-            return Array(subjectSet)
-        }
-        
-        return []
-    }
+   
     
     var body: some View {
         let currentStudent = student.first
@@ -69,7 +61,30 @@ struct ContentView: View {
                             CardView {
                                 UserProfileView(student: validStudent)
                                     .padding(.bottom, 20)
-                                  
+                                
+                                if let lastUpdated = validStudent.updatedAt {
+                                    HStack(spacing: 6) {
+                                        
+                                        Image(systemName: "clock.arrow.circlepath")
+                                            .font(.system(size: 10, weight: .semibold))
+                                        
+                                        Text("Updated ") +
+                                        Text(lastUpdated, style: .date) +
+                                        Text(" at ") +
+                                        Text(lastUpdated, style: .time)
+                                    }
+                                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                                    .foregroundColor(.secondary)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(
+                                        Capsule()
+                                            .fill(Color.primary.opacity(0.04))
+                                    )
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(.bottom, 15)
+                                }
+                                
                                 Section {
                                     UserAboutView()
                                         .padding(.leading, 8)
@@ -77,13 +92,13 @@ struct ContentView: View {
                                     Divider()
                                         .padding(.top, 10)
                                 }
-                                  
+                                
                                 Section {
                                     AcadamicInfoView(selectedTab: $selectedTab, acadamicModel: academicModel)
-                                        
+                                    
                                     Divider()
                                         .padding(.top, 10)
-                                        
+                                    
                                     UserPersonalView(student: validStudent)
                                 }
                             }
@@ -131,7 +146,7 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }.tabItem {
-                Label("Acadamics", systemImage: "graduationcap.fill")
+                Label("Academics", systemImage: "graduationcap.fill")
             }
             .tag(1)
         }

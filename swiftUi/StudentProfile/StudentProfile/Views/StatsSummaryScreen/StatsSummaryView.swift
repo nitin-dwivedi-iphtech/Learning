@@ -1,7 +1,14 @@
+//
+//  StatsSummaryView.swift
+//  StudentProfile
+//
+//  Created by iPHTech 40 on 14/07/26.
+//
+
 import SwiftUI
 import CoreData
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 struct StatsSummaryView: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -60,23 +67,10 @@ struct StatsSummaryView: View {
                                     .foregroundColor(.secondary)
                                     .frame(height: 160)
                             } else {
-                                HStack(alignment: .bottom, spacing: 14) {
-                                    ForEach(academicModel.enrolledSubjects.prefix(7), id: \.self) { (subject: Subjects) in
-                                        let progressValue: Double = subject.progress
-                                        
-                                        let codeValue: String = String(subject.subjectCode)
-                                        
-                                        let baseHeight: Double = max(progressValue, 0.1)
-                                        let barHeight: CGFloat = CGFloat(baseHeight * 150.0)
-                                        
-                                        BarView(
-                                            day: codeValue,
-                                            height: barHeight,
-                                            color: .blue
-                                        )
-                                    }
-                                }
-                                .frame(height: 160)
+                                BarView(
+                                    subjects: Array(academicModel.enrolledSubjects.prefix(7)),
+                                    color: .blue
+                                )
                                 .padding(.top, 10)
                             }
                             
@@ -124,7 +118,7 @@ struct StatsSummaryView_Previews: PreviewProvider {
         let sampleStudent = Student(context: context)
         let sampleModel = AcadamicModel.shared
         
-        if #available(iOS 15.0, *) {
+        if #available(iOS 16.0, *) {
             StatsSummaryView(
                 student: sampleStudent,
                 academicModel: sampleModel
