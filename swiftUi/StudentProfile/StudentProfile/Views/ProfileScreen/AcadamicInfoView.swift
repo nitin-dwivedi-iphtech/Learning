@@ -8,14 +8,6 @@
     import SwiftUI
 
     struct AcadamicInfoView: View {
-        // Mock / Static Data matching an MCA student portfolio
-        let universityName = "Stanford University"
-        let departmentName = "Department of Computer Science"
-        let courseName = "Master of Computer Applications"
-        let currentSemester = "Semester IV"
-        let studentID = "STU-2026-8942"
-        let currentCGPA = "9.24"
-        let attendanceRate = "94%"
         
         @Binding var selectedTab: Int
         @ObservedObject var acadamicModel: AcadamicModel

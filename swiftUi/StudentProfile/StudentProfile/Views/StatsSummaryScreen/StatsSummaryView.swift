@@ -1,16 +1,27 @@
-//
-//  StatsSummaryView.swift
-//  StudentProfile
-//
-//  Created by iPHTech 40 on 14/07/26.
-//
-
 import SwiftUI
+import CoreData
 
 @available(iOS 15.0, *)
 struct StatsSummaryView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var student: Student
+    
+    var academicModel: AcadamicModel
+    
+    var academics: Acadamics? {
+        academicModel.acadamics.first
+    }
+    
+    private var averageProgress: Double {
+        guard !academicModel.enrolledSubjects.isEmpty else { return 0.0 }
+        let totalProgress = academicModel.enrolledSubjects.reduce(0.0) { $0 + $1.progress }
+        return (totalProgress / Double(academicModel.enrolledSubjects.count)) * 100
+    }
+    
+    private var totalCredits: Int16 {
+        academics?.creditsCompleted ?? 0
+    }
     
     var body: some View {
         NavigationView {
@@ -19,17 +30,17 @@ struct StatsSummaryView: View {
                     
                     HStack(spacing: 16) {
                         StatCard(
-                            title: "Study Hours",
-                            value: "42.5 hrs",
-                            subtitle: "This semester",
-                            icon: "clock.fill",
+                            title: "Current CGPA",
+                            value: String(format: "%.2f", academics?.cgpa ?? 0.0),
+                            subtitle: academics?.course ?? "No Course Registered",
+                            icon: "graduationcap.fill",
                             color: .purple
                         )
                         
                         StatCard(
-                            title: "Assignment Score",
-                            value: "92%",
-                            subtitle: "Avg. Grade",
+                            title: "Avg. Progress",
+                            value: String(format: "%.0f%%", averageProgress),
+                            subtitle: "\(totalCredits) Credits Earned",
                             icon: "doc.plaintext.fill",
                             color: .orange
                         )
@@ -37,30 +48,47 @@ struct StatsSummaryView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Weekly Performance")
+                        Text("Subject Progression")
                             .font(.system(.headline, design: .rounded))
                             .foregroundColor(.primary)
                             .padding(.horizontal)
                         
                         VStack(spacing: 16) {
-                            HStack(alignment: .bottom, spacing: 14) {
-                                BarView(day: "Mon", height: 80, color: .blue)
-                                BarView(day: "Tue", height: 120, color: .blue)
-                                BarView(day: "Wed", height: 150, color: .purple) // Midweek peak
-                                BarView(day: "Thu", height: 90, color: .blue)
-                                BarView(day: "Fri", height: 60, color: .blue)
-                                BarView(day: "Sat", height: 30, color: .gray.opacity(0.4))
-                                BarView(day: "Sun", height: 45, color: .gray.opacity(0.4))
+                            if academicModel.enrolledSubjects.isEmpty {
+                                Text("No subjects added yet.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .frame(height: 160)
+                            } else {
+                                HStack(alignment: .bottom, spacing: 14) {
+                                    ForEach(academicModel.enrolledSubjects.prefix(7), id: \.self) { (subject: Subjects) in
+                                        let progressValue: Double = subject.progress
+                                        
+                                        let codeValue: String = String(subject.subjectCode)
+                                        
+                                        let baseHeight: Double = max(progressValue, 0.1)
+                                        let barHeight: CGFloat = CGFloat(baseHeight * 150.0)
+                                        
+                                        BarView(
+                                            day: codeValue,
+                                            height: barHeight,
+                                            color: .blue
+                                        )
+                                    }
+                                }
+                                .frame(height: 160)
+                                .padding(.top, 10)
                             }
-                            .frame(height: 160)
-                            .padding(.top, 10)
                             
                             Divider()
                             
                             HStack {
-                                Label("Daily Average: 4.5 hrs", systemImage: "bolt.fill")
-                                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                                    .foregroundColor(.purple)
+                                Label(
+                                    "Attendance: \(String(format: "%.1f%%", academics?.attendancePercentage ?? 0.0))",
+                                    systemImage: "bolt.fill"
+                                )
+                                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                                .foregroundColor(.purple)
                                 Spacer()
                             }
                         }
@@ -90,11 +118,18 @@ struct StatsSummaryView: View {
     }
 }
 
-
-
-
-#Preview {
-    if #available(iOS 15.0, *) {
-        StatsSummaryView()
+struct StatsSummaryView_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let sampleStudent = Student(context: context)
+        let sampleModel = AcadamicModel.shared
+        
+        if #available(iOS 15.0, *) {
+            StatsSummaryView(
+                student: sampleStudent,
+                academicModel: sampleModel
+            )
+            .preferredColorScheme(.dark)
+        }
     }
 }

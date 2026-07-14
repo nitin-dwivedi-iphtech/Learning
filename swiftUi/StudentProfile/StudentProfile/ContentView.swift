@@ -21,6 +21,16 @@ struct ContentView: View {
         entity: Student.entity(), sortDescriptors: []
     ) var student: FetchedResults<Student>
     
+    private var coreDataSubjects: [Subjects] {
+        guard let currentAcademicRecord = academicModel.acadamics.first else { return [] }
+        
+        if let subjectSet = currentAcademicRecord.subjectRecord as? Set<Subjects> {
+            return Array(subjectSet)
+        }
+        
+        return []
+    }
+    
     var body: some View {
         let currentStudent = student.first
         
@@ -129,10 +139,15 @@ struct ContentView: View {
         .preferredColorScheme(selectedColorScheme)
         .sheet(isPresented: $showStatsSheet) {
             if #available(iOS 16.0, *) {
-                StatsSummaryView()
-                    .presentationDragIndicator(.visible)
-                    .presentationDetents([.medium, .large])
-            } 
+                if let validStudent = student.first {
+                    StatsSummaryView(student: validStudent, academicModel: academicModel)
+                        .presentationDragIndicator(.visible)
+                        .presentationDetents([.medium, .large])
+                } else {
+                    Text("Profile Not Found")
+                        .padding()
+                }
+            }
         }
     }
     
@@ -147,6 +162,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(ProfileSetting())
+        ContentView().environmentObject(ProfileSetting()).preferredColorScheme(.dark)
     }
 }

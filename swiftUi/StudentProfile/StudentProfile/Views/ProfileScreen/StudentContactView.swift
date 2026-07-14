@@ -33,7 +33,7 @@ struct StudentContactView: View {
             .foregroundColor(.white)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .background(Color.green) // Classic phone color theme
+            .background(Color.green) 
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
     }

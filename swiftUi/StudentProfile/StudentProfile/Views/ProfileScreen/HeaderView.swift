@@ -12,7 +12,6 @@ struct HeaderView: View {
     @EnvironmentObject var userSetting: ProfileSetting
     @State private var isShowingEditSheet = false
     
-    // 1. Add this binding to control the sheet in ContentView
     @Binding var showStatsSheet: Bool
     
     @ObservedObject var student: Student

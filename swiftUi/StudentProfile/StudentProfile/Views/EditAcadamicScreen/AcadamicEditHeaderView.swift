@@ -35,12 +35,11 @@ struct AcadamicEditHeaderView: View {
             
             Text("Edit Academics")
                 .font(.system(size: 17, weight: .semibold, design: .rounded))
-                .foregroundColor(.primary) // Auto-toggles black/white based on theme
+                .foregroundColor(.primary)
             
             Spacer()
             
             Button(action: {
-                // updates the array in acadamicModel
                 acadamicModel.updateData(for: acadamicModel, universityName: universityName, departmentName: departmentName, courseName: courseName, currentSemester: currentSemester, currentCGPA: currentCGPA,attendanceRate: attendanceRate, completedCredits: completedCredits)
                 
                 presentationMode.wrappedValue.dismiss()

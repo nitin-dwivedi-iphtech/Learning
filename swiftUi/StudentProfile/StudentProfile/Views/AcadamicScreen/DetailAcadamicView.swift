@@ -23,14 +23,6 @@ struct DetailAcadamicView: View {
     @Environment(\.currentStudent) private var currentStudent: Student?
     @ObservedObject var academicModel: AcadamicModel
     
-    // Dynamic list for enrolled subjects
-    let subjects = [
-        Subjec(code: "MCA-401", name: "Advanced Software Engineering", credits: 4, iconName: "terminal.fill", tintColor: .purple),
-        Subjec(code: "MCA-402", name: "Cloud Computing & DevOps", credits: 4, iconName: "cloud.fill", tintColor: .blue),
-        Subjec(code: "MCA-403", name: "Big Data Analytics", credits: 3, iconName: "chart.pie.fill", tintColor: .orange),
-        Subjec(code: "MCA-499", name: "Major Project / Dissertation", credits: 6, iconName: "doc.text.below.ecg.fill", tintColor: .pink)
-    ]
-    
     
     var body: some View {
         

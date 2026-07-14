@@ -16,11 +16,11 @@ struct AcademicInputField: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label)
                 .font(.caption)
-                .foregroundColor(.blue) // Tint/Accent color stays consistent across themes
+                .foregroundColor(.blue)
                 .bold()
             TextField(placeholder, text: $text)
                 .font(.body)
-                .foregroundColor(.primary) // Changes color dynamically (Black in Light, White in Dark)
+                .foregroundColor(.primary)
         }
         .padding(.vertical, 2)
     }

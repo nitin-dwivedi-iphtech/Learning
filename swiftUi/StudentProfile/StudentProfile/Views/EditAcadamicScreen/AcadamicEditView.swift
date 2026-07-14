@@ -11,7 +11,6 @@ struct AcadamicEditView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var acadamicModel: AcadamicModel
     
-    // Form States matching your academic structure
     @State private var universityName: String = "Stanford University"
     @State private var departmentName: String = "Department of Computer Science"
     @State private var courseName: String = "Master of Computer Applications"
@@ -21,9 +20,7 @@ struct AcadamicEditView: View {
     @State private var attendanceRate: Float = 94
     @State private var completedCredits: Int16 = 78
     
-    // Constants for graduation limits
     let totalRequiredCredits: Double = 90
-    let semesters = ["Semester I", "Semester II", "Semester III", "Semester IV"]
     
     var body: some View {
         let firstRecord = acadamicModel.acadamics.first

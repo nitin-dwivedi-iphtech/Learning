@@ -35,7 +35,6 @@ struct AcademicEditCreditView: View {
                         .foregroundColor(.primary)
                 }
                 
-                // Pass our type-safe proxy binding here
                 Slider(value: sliderBinding, in: 0...totalRequiredCredits, step: 1)
                     .accentColor(.orange)
             }

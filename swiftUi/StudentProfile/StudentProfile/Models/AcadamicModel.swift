@@ -24,6 +24,14 @@ class AcadamicModel: NSObject, ObservableObject {
         super.init()
     }
     
+    var enrolledSubjects: [Subjects] {
+        guard let currentRecord = acadamics.first else { return [] }
+        if let subjectSet = currentRecord.subjectRecord as? Set<Subjects> {
+            return Array(subjectSet).sorted { ($0.subjectName ?? "") < ($1.subjectName ?? "") }
+        }
+        return []
+    }
+    
     func configure(studentId: String, context: NSManagedObjectContext) {
         guard currentConfiguredStudentId != studentId else { return }
         
@@ -61,6 +69,8 @@ class AcadamicModel: NSObject, ObservableObject {
             print("Failed to fetch academics: \(error.localizedDescription)")
         }
     }
+    
+    
     
     func updateData(for record: AcadamicModel, universityName: String, departmentName: String, courseName: String, currentSemester: String, currentCGPA: Float, attendanceRate: Float, completedCredits: Int16) {
         // update logic

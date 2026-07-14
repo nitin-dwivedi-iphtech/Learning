@@ -11,16 +11,6 @@ struct DetailAcadamicEnrolledSubjectView: View {
     
     @ObservedObject var academicModel: AcadamicModel
     
-    private var coreDataSubjects: [Subjects] {
-        guard let currentAcademicRecord = academicModel.acadamics.first else { return [] }
-        
-        if let subjectSet = currentAcademicRecord.subjectRecord as? Set<Subjects> {
-            return Array(subjectSet)
-        }
-        
-        return []
-    }
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Enrolled Subjects")
@@ -28,15 +18,14 @@ struct DetailAcadamicEnrolledSubjectView: View {
                 .padding(.horizontal, 4)
             
             VStack(spacing: 0) {
-                if coreDataSubjects.isEmpty {
+                if academicModel.enrolledSubjects.isEmpty {
                     Text("No Enrolled Subjects Found")
                         .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundColor(.secondary)
                         .padding(.vertical, 24)
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else {
-                    // Show a preview of up to 3 subjects on the dashboard
-                    ForEach(coreDataSubjects.prefix(3), id: \.objectID) { subject in
+                    ForEach(academicModel.enrolledSubjects.prefix(3), id: \.objectID) { subject in
                         NavigationLink(destination: SubjectDetailView(subject: subject)) {
                             HStack(spacing: 14) {
                                 Image(systemName: subject.subjectIcon ?? "book.closed.fill")
@@ -79,8 +68,7 @@ struct DetailAcadamicEnrolledSubjectView: View {
                         Divider().padding(.leading, 66)
                     }
                     
-                    // "See More" navigation cell to view all details
-                    NavigationLink(destination: EnrolledSubjectsListView(subjects: coreDataSubjects)) {
+                    NavigationLink(destination: EnrolledSubjectsListView(subjects: academicModel.enrolledSubjects)) {
                         HStack {
                             Text("See More Enrolled Subjects")
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -105,6 +93,6 @@ struct DetailAcadamicEnrolledSubjectView: View {
 
 struct DetailAcadamicEnrolledSubjectView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailAcadamicEnrolledSubjectView(academicModel: AcadamicModel.shared)
+        DetailAcadamicEnrolledSubjectView(academicModel: AcadamicModel.shared).preferredColorScheme(.dark)
     }
 }
