@@ -13,7 +13,9 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject private var academicModel = AcadamicModel.shared
     @EnvironmentObject var userSetting: ProfileSetting
+    
     @State private var selectedTab = 0
+    @State var showStatsSheet: Bool = false
     
     @FetchRequest(
         entity: Student.entity(), sortDescriptors: []
@@ -28,33 +30,33 @@ struct ContentView: View {
                     LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
                         .ignoresSafeArea()
                     
-                    VStack(spacing: 10) {
-                        HStack {
-                            HeaderView()
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                withAnimation {
-                                    userSetting.appDisplayTheme = (userSetting.appDisplayTheme + 1) % 3
+                    if let validStudent = currentStudent {
+                        VStack(spacing: 10) {
+                            HStack {
+                                HeaderView(showStatsSheet: $showStatsSheet, student: validStudent)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    withAnimation {
+                                        userSetting.appDisplayTheme = (userSetting.appDisplayTheme + 1) % 3
+                                    }
+                                }) {
+                                    Image(systemName: themeIconName)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(.primary)
+                                        .frame(width: 36, height: 36)
+                                        .background(Color(.systemBackground).opacity(0.6))
+                                        .clipShape(Circle())
+                                        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
                                 }
-                            }) {
-                                Image(systemName: themeIconName)
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.primary)
-                                    .frame(width: 36, height: 36)
-                                    .background(Color(.systemBackground).opacity(0.6))
-                                    .clipShape(Circle())
-                                    .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
                             }
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        CardView {
-                            if let validStudent = currentStudent {
+                            .padding(.horizontal, 20)
+                            
+                            CardView {
                                 UserProfileView(student: validStudent)
                                     .padding(.bottom, 20)
-                                
+                                  
                                 Section {
                                     UserAboutView()
                                         .padding(.leading, 8)
@@ -62,7 +64,7 @@ struct ContentView: View {
                                     Divider()
                                         .padding(.top, 10)
                                 }
-                                
+                                  
                                 Section {
                                     AcadamicInfoView(selectedTab: $selectedTab, acadamicModel: academicModel)
                                         
@@ -71,18 +73,17 @@ struct ContentView: View {
                                         
                                     UserPersonalView(student: validStudent)
                                 }
-                            } else {
-                                VStack(spacing: 12) {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
-                                    Text("Loading Profile...")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 40)
                             }
                         }
+                    } else {
+                        VStack(spacing: 12) {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                            Text("Loading Profile...")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
                 .navigationBarHidden(true)
@@ -114,8 +115,7 @@ struct ContentView: View {
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 40)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }.tabItem {
                 Label("Acadamics", systemImage: "graduationcap.fill")
@@ -124,6 +124,13 @@ struct ContentView: View {
         }
         .environment(\.currentStudent, currentStudent)
         .preferredColorScheme(selectedColorScheme)
+        .sheet(isPresented: $showStatsSheet) {
+            if #available(iOS 16.0, *) {
+                StatsSummaryView()
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.medium, .large])
+            } 
+        }
     }
     
     private var themeIconName: String {

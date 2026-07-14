@@ -13,7 +13,6 @@ struct UserPdfView: View {
     @ObservedObject var student: Student
     let academicModel: AcadamicModel = AcadamicModel.shared
     
-    // Label width alignment anchor for uniform layout columns
     private let labelWidth: CGFloat = 140
     
     private var dateFormatter: DateFormatter {
@@ -25,7 +24,6 @@ struct UserPdfView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 25) {
             
-            // 1. Document Header Block
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("STUDENT PORTFOLIO REPORT")
@@ -43,7 +41,6 @@ struct UserPdfView: View {
             
             Divider()
             
-            // 2. Personal Information Card Block
             VStack(alignment: .leading, spacing: 14) {
                 Text("Personal Profile")
                     .font(.system(.headline, design: .rounded))
@@ -69,7 +66,6 @@ struct UserPdfView: View {
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
             
-            // 3. Simplified Academic Details Block (Text Combination Only)
             VStack(alignment: .leading, spacing: 14) {
                 Text("Academic Performance")
                     .font(.system(.headline, design: .rounded))
@@ -77,7 +73,6 @@ struct UserPdfView: View {
                     .textCase(.uppercase)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    // Replace the property references below with your exact AcadamicModel attributes if different
                     infoRow(label: "Current Status:", value: "Enrolled")
                     infoRow(label: "Evaluation Period:", value: "Fall Semester 2026")
                     infoRow(label: "Academic Record:", value: "Verified by Registrar Office")
@@ -90,17 +85,15 @@ struct UserPdfView: View {
             
             Spacer()
             
-            // Footer Branding Note
             Text("Confidential Document - Student Profile System")
                 .font(.caption2)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding(40)
-        .frame(width: 612, height: 792) // Standard layout footprint size constraints
+        .frame(width: 612, height: 792) 
         .background(Color(.systemBackground))
     }
     
-    // MARK: - Reusable Layout Column Row Alignment Helper
     private func infoRow(label: String, value: String) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Text(label)

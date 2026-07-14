@@ -40,21 +40,38 @@ extension EnvironmentValues {
  SaveData extension in ProfileEditView.swift
  */
 extension ProfileEditView {
-    func saveData(name: String, email: String, phone: String, id: String, gender: String, dob: Date, student: Student?, viewContext: NSManagedObjectContext) {
+    
+    func saveProfileChanges(name: String, email: String, phone: String, id: String, gender: String, dob: Date, viewContext: NSManagedObjectContext, selectedImage: UIImage?) {
+  
+        student.username = name
+        student.userPhone = phone
+        student.userEmail = email
+        student.studentId = id
+        student.gender = gender
+        student.dob = dob
         
-        let targetStudent: Student = student ?? Student(context: viewContext)
-        targetStudent.username = name
-        targetStudent.userPhone = phone
-        targetStudent.userEmail = email
-        targetStudent.studentId = id
-        targetStudent.gender = gender
-        targetStudent.dob = dob
+        if let imageToSave = selectedImage {
+            if let imageData = imageToSave.jpegData(compressionQuality: 0.8) {
+                let filename = "student_\(id.isEmpty ? UUID().uuidString : id).jpg"
+                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileURL = documentsDirectory.appendingPathComponent(filename)
+                
+                do {
+                    try imageData.write(to: fileURL)
+                    student.userImage = filename
+                } catch {
+                    print("Critical Error: Disk write failed: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        student.updatedAt = Date()
         
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
             } catch {
-                print("Failed to save to database: \(error.localizedDescription)")
+                print("Failed to save context to database: \(error.localizedDescription)")
             }
         }
     }
@@ -69,7 +86,7 @@ extension Student {
         dummy.username = "John Doe"
         dummy.studentId = "STU-2026-8942"
         dummy.userEmail = "john.doe@university.edu"
-        dummy.userPhone = "+1 (555) 019-2834"
+        dummy.userPhone = "789632568"
         dummy.gender = "Male"
         dummy.dob = Calendar.current.date(byAdding: .year, value: -20, to: Date())
         
@@ -146,10 +163,10 @@ extension Subjects {
     static func createDummySubjects(in context: NSManagedObjectContext, for academics: Acadamics) {
         
         let dummyList = [
-            (code: Int16(401), name: "Advanced Software Engineering", credits: Int16(4), icon: "terminal.fill"),
-            (code: Int16(402), name: "Cloud Computing & DevOps", credits: Int16(4), icon: "cloud.fill"),
-            (code: Int16(403), name: "Big Data Analytics", credits: Int16(3), icon: "chart.pie.fill"),
-            (code: Int16(499), name: "Major Project / Dissertation", credits: Int16(6), icon: "doc.text.below.ecg.fill")
+            (code: Int16(401), name: "Advanced Software Engineering", credits: Int16(4), icon: "terminal.fill", progress: Double(0.65)),
+            (code: Int16(402), name: "Cloud Computing & DevOps", credits: Int16(4), icon: "cloud.fill", progress: Double(0.45)),
+            (code: Int16(403), name: "Big Data Analytics", credits: Int16(3), icon: "chart.pie.fill", progress: Double(0.35)),
+            (code: Int16(499), name: "Major Project / Dissertation", credits: Int16(6), icon: "doc.text.below.ecg.fill", progress: Double(0.85))
         ]
         
         for item in dummyList {
@@ -158,6 +175,7 @@ extension Subjects {
             dummy.subjectName = item.name
             dummy.credits = item.credits
             dummy.subjectIcon = item.icon
+            dummy.progress = item.progress
             
             dummy.acad_sub = academics
         }

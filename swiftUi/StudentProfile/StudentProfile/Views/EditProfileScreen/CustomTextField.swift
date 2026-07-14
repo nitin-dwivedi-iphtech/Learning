@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct CustomTextField: View {
     
     @Binding var text: String
@@ -16,13 +15,12 @@ struct CustomTextField: View {
     let placeholder: String
     let icon: String
     
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
-                .font(.system(size:15, design: .rounded))
+                .font(.system(size: 15, design: .rounded))
                 .fontWeight(.semibold)
-//                .foregroundColor(.gray)
+                .foregroundColor(.primary)
             
             HStack(spacing: 10) {
                 Image(systemName: icon)
@@ -35,7 +33,7 @@ struct CustomTextField: View {
                     .disableAutocorrection(true)
             }
             .padding()
-            .background(Color.white)
+            .background(Color(.secondarySystemGroupedBackground))
             .cornerRadius(8)
         }
     }
@@ -53,6 +51,7 @@ struct CustomDatePicker: View {
             Text(title)
                 .font(.system(size: 15, design: .rounded))
                 .fontWeight(.semibold)
+                .foregroundColor(.primary)
             
             HStack(spacing: 10) {
                 Image(systemName: icon)
@@ -66,7 +65,7 @@ struct CustomDatePicker: View {
                 Spacer()
             }
             .padding()
-            .background(Color.white)
+            .background(Color(.secondarySystemGroupedBackground))
             .cornerRadius(8)
         }
     }
@@ -86,6 +85,7 @@ struct CustomGenderPicker: View {
             Text(title)
                 .font(.system(size: 15, design: .rounded))
                 .fontWeight(.semibold)
+                .foregroundColor(.primary)
             
             HStack(spacing: 16) {
                 Image(systemName: icon)
@@ -100,9 +100,8 @@ struct CustomGenderPicker: View {
                             HStack(spacing: 6) {
                                 Image(systemName: selectedGender == option ? "largecircle.fill.circle" : "circle")
                                     .font(.system(size: 18))
-                                    .foregroundColor(selectedGender == option ? .blue : .gray)
+                                    .foregroundColor(selectedGender == option ? .blue : .secondary) // Fallback to adaptive grey
                                 
-                                // The Label
                                 Text(option)
                                     .font(.system(.body, design: .rounded))
                                     .foregroundColor(.primary)
@@ -115,19 +114,33 @@ struct CustomGenderPicker: View {
                 Spacer()
             }
             .padding()
-            .background(Color.white)
+            .background(Color(.secondarySystemGroupedBackground))
             .cornerRadius(8)
         }
     }
 }
 
-//struct CustomTextField_Preview: PreviewProvider {
-//    static var previews: some View {
-//        CustomTextField(
-//            title: "Email Address",
-//            placeholder: "enter email",
-//            text: .constant("\(text)"), // Pass a static binding string here
-//            icon: "envelope"     // SF Symbol name string
-//        )
-//    }
-//}
+struct CustomFields_Preview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            VStack(spacing: 20) {
+                CustomTextField(text: .constant(""), title: "Email Address", placeholder: "enter email", icon: "envelope")
+                CustomDatePicker(selection: .constant(Date()), title: "Date of Birth", icon: "calendar")
+                CustomGenderPicker(selectedGender: .constant("Male"), title: "Gender", icon: "person.circle")
+            }
+            .padding()
+            .preferredColorScheme(.light)
+            .previewDisplayName("Light Mode")
+            
+            VStack(spacing: 20) {
+                CustomTextField(text: .constant(""), title: "Email Address", placeholder: "enter email", icon: "envelope")
+                CustomDatePicker(selection: .constant(Date()), title: "Date of Birth", icon: "calendar")
+                CustomGenderPicker(selectedGender: .constant("Male"), title: "Gender", icon: "person.circle")
+            }
+            .padding()
+            .preferredColorScheme(.dark)
+            .previewDisplayName("Dark Mode")
+        }
+        .background(Color(.systemGroupedBackground))
+    }
+}

@@ -4,15 +4,23 @@
 //
 //  Created by iPHTech6 on 07/07/26.
 //
+//
+//  ProfileEditView.swift
+//  StudentProfile
+//
+//  Created by iPHTech6 on 07/07/26.
+//
 
 import SwiftUI
 
 struct ProfileEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.currentStudent) var currentStudent
+    
+    @ObservedObject var student: Student
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var selectedImage: UIImage? = nil
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var phone: String = ""
@@ -43,23 +51,36 @@ struct ProfileEditView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color("BrandWhite").opacity(0.5), Color.white.opacity(0.5)]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            Color(.systemGroupedBackground)
+                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 
-                 UserEditHeaderView()
+                UserEditHeaderView()
                     .padding(.top, 10)
                 
                 ScrollView {
                     VStack(spacing: 20) {
                         HeroSectionView(name: $name, email: $email, phone: $phone, id: $id, dob: $dob, gender: $gender)
                         
-                        UserImageView()
+                        if #available(iOS 16.0, *) {
+                            UserImageView(student: student, selectedImage: $selectedImage, size: 70)
+                        } else {
+                            Group {
+                                if let selectedImage = selectedImage {
+                                    Image(uiImage: selectedImage)
+                                        .resizable()
+                                } else {
+                                    Image("user")
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 70, height: 70)
+                            .clipShape(Circle())
+                        }
                         
                         CardView {
                             UserEditFieldsView(inputName: $name, inputEmail: $email, inputPhone: $phone, inputId: $id, inputDate: $dob, inputGender: $gender)
@@ -75,7 +96,7 @@ struct ProfileEditView: View {
                 Button(action: {
                     if validateField(name: name, email: email, phone: phone) {
                         
-                        saveData(name: name, email: email, phone: phone, id: id, gender: gender, dob: dob, student: currentStudent, viewContext: viewContext)
+                        saveProfileChanges(name: name, email: email, phone: phone, id: id, gender: gender, dob: dob, viewContext: viewContext, selectedImage: selectedImage)
                         
                         self.presentationMode.wrappedValue.dismiss()
                         
@@ -103,17 +124,20 @@ struct ProfileEditView: View {
             }
         }
         .onAppear {
-            self.name = currentStudent?.username ?? ""
-            self.email = currentStudent?.userEmail ?? ""
-            self.phone = currentStudent?.userPhone ?? ""
-            self.id = currentStudent?.studentId ?? ""
+            self.name = student.username ?? ""
+            self.email = student.userEmail ?? ""
+            self.phone = student.userPhone ?? ""
+            self.id = student.studentId ?? ""
+            self.gender = student.gender ?? ""
+            
+            if let filename = student.userImage, !filename.isEmpty {
+                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileURL = documentsDirectory.appendingPathComponent(filename)
+                
+                if let data = try? Data(contentsOf: fileURL, options: .uncached), let uiImage = UIImage(data: data) {
+                    self.selectedImage = uiImage
+                }
+            }
         }
-    }
-}
-
-struct ProfileEdit_Preview: PreviewProvider {
-    static var previews: some View {
-        ProfileEditView()
-            .environmentObject(ProfileSetting())
     }
 }
