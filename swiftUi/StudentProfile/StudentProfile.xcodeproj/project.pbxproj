@@ -55,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		134CB3BA2FFFCA0C003AB703 /* DetailAcadamicInstitutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAcadamicInstitutionView.swift; sourceTree = "<group>"; };
+		1356EFCB300DDB3100C7CEE7 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		13622F553006091800C3C6FC /* StatsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSummaryView.swift; sourceTree = "<group>"; };
 		13622F5730060DB500C3C6FC /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		13622F5930060DD900C3C6FC /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		219A37542FFCDC1400429F8B = {
 			isa = PBXGroup;
 			children = (
+				1356EFCB300DDB3100C7CEE7 /* Readme.md */,
 				219A375F2FFCDC1400429F8B /* StudentProfile */,
 				219A375E2FFCDC1400429F8B /* Products */,
 			);
